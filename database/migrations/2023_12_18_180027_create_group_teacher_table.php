@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
-            $table->id();
-            $table->decimal('amount')->default(0.00);
-            $table->timestamps();
+        Schema::create('group_teacher', function (Blueprint $table) {
+            $table->foreignId('group_id')
+                ->constrained('groups')
+                ->cascadeOnDelete();
+            $table->foreignId('teacher_id')
+                ->constrained('teachers')
+                ->cascadeOnDelete();
         });
     }
 
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('group_teacher');
     }
 };
