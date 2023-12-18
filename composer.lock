@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b4d6477f48024e245aa6b9d7989ac45",
+    "content-hash": "ca806103827ae582d00bef84431349d3",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
-            "version": "2.1.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/blade-ui-kit/blade-heroicons.git",
-                "reference": "f756c807b0d04afd2caf7079bac26492da9cc6d4"
+                "reference": "bcf4be8f6bbde0bb4c23f2e3fb189b88dec1580a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blade-ui-kit/blade-heroicons/zipball/f756c807b0d04afd2caf7079bac26492da9cc6d4",
-                "reference": "f756c807b0d04afd2caf7079bac26492da9cc6d4",
+                "url": "https://api.github.com/repos/blade-ui-kit/blade-heroicons/zipball/bcf4be8f6bbde0bb4c23f2e3fb189b88dec1580a",
+                "reference": "bcf4be8f6bbde0bb4c23f2e3fb189b88dec1580a",
                 "shasum": ""
             },
             "require": {
@@ -61,19 +61,19 @@
             ],
             "support": {
                 "issues": "https://github.com/blade-ui-kit/blade-heroicons/issues",
-                "source": "https://github.com/blade-ui-kit/blade-heroicons/tree/2.1.0"
+                "source": "https://github.com/blade-ui-kit/blade-heroicons/tree/2.2.1"
             },
             "funding": [
                 {
-                    "url": "https://github.com/caneco",
+                    "url": "https://github.com/sponsors/driesvints",
                     "type": "github"
                 },
                 {
-                    "url": "https://github.com/driesvints",
-                    "type": "github"
+                    "url": "https://www.paypal.com/paypalme/driesvints",
+                    "type": "paypal"
                 }
             ],
-            "time": "2023-01-11T08:38:22+00:00"
+            "time": "2023-12-18T20:44:03+00:00"
         },
         {
             "name": "blade-ui-kit/blade-icons",
@@ -3946,16 +3946,16 @@
         },
         {
             "name": "spatie/image",
-            "version": "3.1.0",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/image.git",
-                "reference": "d029e0eafd747d22b2b4c4867d4524a14d15536e"
+                "reference": "a000e43867102e0722606de5ebe23aef06a2509e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/image/zipball/d029e0eafd747d22b2b4c4867d4524a14d15536e",
-                "reference": "d029e0eafd747d22b2b4c4867d4524a14d15536e",
+                "url": "https://api.github.com/repos/spatie/image/zipball/a000e43867102e0722606de5ebe23aef06a2509e",
+                "reference": "a000e43867102e0722606de5ebe23aef06a2509e",
                 "shasum": ""
             },
             "require": {
@@ -4002,7 +4002,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/image/tree/3.1.0"
+                "source": "https://github.com/spatie/image/tree/3.2.0"
             },
             "funding": [
                 {
@@ -4014,7 +4014,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-15T14:30:34+00:00"
+            "time": "2023-12-18T17:59:58+00:00"
         },
         {
             "name": "spatie/image-optimizer",
@@ -9505,7 +9505,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.1"
+        "php": "^8.1",
+        "ext-imagick": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

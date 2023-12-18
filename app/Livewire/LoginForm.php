@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Livewire;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
-use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,14 +27,13 @@ class LoginForm extends Component
     public string $password = '';
 
     /**
-     * @return RedirectResponse|void
+     * @return void|null
      */
     public function submit()
     {
         $this->validate(self::VALIDATION_RULES);
-
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
-            return redirect('/');
+            $this->redirect('/', navigate: true);
         } else {
             session()->flash('error', 'Invalid credentials');
         }
