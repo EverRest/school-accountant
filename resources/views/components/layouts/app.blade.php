@@ -36,15 +36,14 @@
                     <x-menu-item title="Teachers" icon="o-users" link="####"/>
                     <x-menu-item title="Students" icon="o-user-group" link="####"/>
                 </x-menu-sub>
-                <x-menu-sub title="Courses" icon="o-users">
+                <x-menu-sub title="Courses" icon="o-pencil-square">
                     <x-menu-item title="Administrators" icon="o-user-circle" link="####"/>
                     <x-menu-item title="Teachers" icon="o-users" link="####"/>
                     <x-menu-item title="Students" icon="o-user-group" link="####"/>
                 </x-menu-sub>
                 <x-menu-sub title="Accountant" icon="o-credit-card">
-                    <x-menu-item title="Administrators" icon="o-user-circle" link="####"/>
-                    <x-menu-item title="Teachers" icon="o-users" link="####"/>
-                    <x-menu-item title="Students" icon="o-user-group" link="####"/>
+                    <x-menu-item title="Statistics" icon="o-chart-bar-square" link="/statistics"/>
+                    <x-menu-item title="Payments" icon="o-credit-card" link="/payments"/>
                 </x-menu-sub>
                 <x-menu-sub title="Reports" icon="o-clipboard-document-check">
                     <x-menu-item title="Wifi" icon="o-wifi" link="####" />
