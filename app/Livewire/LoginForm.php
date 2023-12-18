@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginForm extends Component
 {
+    private const VALIDATION_RULES = [
+        'email' => 'required|email',
+        'password' => 'required',
+    ];
+
     /**
      * @var string
      */
@@ -26,13 +31,10 @@ class LoginForm extends Component
      */
     public function submit()
     {
-        $this->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        $this->validate(self::VALIDATION_RULES);
 
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
-            return redirect()->intended('users');
+            return redirect('/');
         } else {
             session()->flash('error', 'Invalid credentials');
         }
