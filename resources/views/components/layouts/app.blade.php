@@ -31,7 +31,7 @@
                     <x-menu-item title="Teachers" icon="o-users" link="/teachers"/>
                     <x-menu-item title="Students" icon="o-user-group" link="/students"/>
                 </x-menu-sub>
-                <x-menu-sub title="Attendee" icon="o-users">
+                <x-menu-sub title="Attendee" icon="o-chart-pie">
                     <x-menu-item title="Administrators" icon="o-user-circle" link="####"/>
                     <x-menu-item title="Teachers" icon="o-users" link="####"/>
                     <x-menu-item title="Students" icon="o-user-group" link="####"/>

@@ -7,7 +7,7 @@ use Spatie\Permission\Models\Role;
 
 class RolesSeeder extends Seeder
 {
-    private const ROLES = [
+    public const ROLES = [
         'owner',
         'administrator',
         'teacher',

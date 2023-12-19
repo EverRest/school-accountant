@@ -74,6 +74,18 @@ abstract class AbstractIndexService
     }
 
     /**
+     * @param array $filters
+     *
+     * @return EloquentBuilder
+     */
+    public function all(array $filters = []): EloquentBuilder
+    {
+        $q =$this->query();
+
+        return $this->filter($q, $filters);
+    }
+
+    /**
      * @param array $data
      *
      * @return EloquentBuilder
