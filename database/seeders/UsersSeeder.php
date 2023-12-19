@@ -14,10 +14,10 @@ class UsersSeeder extends Seeder
     public function run(): void
     {
         Role::query()->each(
-            function () {
+            function (Role $role) {
                 for($i = 0;$i < 21;$i++) {
                     $user = User::factory()->create();
-                    $user->assignRole();
+                    $user->assignRole($role);
                 }
             }
         );

@@ -1,7 +1,10 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Livewire;
 
+use App\Enums\RoleEnum;
+use App\Services\UserService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -13,10 +16,13 @@ class Students extends Component
     use WithPagination;
 
     /**
+     * @param UserService $userService
+     *
      * @return \Illuminate\Contracts\Foundation\Application|Factory|View|Application
      */
-    public function render(): Application|View|Factory|\Illuminate\Contracts\Foundation\Application
+    public function render(UserService $userService): Application|View|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('livewire.students');
+        $users = $userService->getUsersByRoleCodePaginated(RoleEnum::Student->value);
+        return view('livewire.students', compact('users'));
     }
 }

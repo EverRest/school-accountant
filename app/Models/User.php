@@ -49,4 +49,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * @param $query
+     * @param string $roles
+     *
+     * @return mixed
+     */
+    public function scopeRole($query, string $roles): mixed
+    {
+        return $query->whereHas(
+            'roles',
+            fn($q) => $q->where(['name' => $roles])
+        );
+    }
 }
