@@ -10,8 +10,6 @@
     </x-header>
 
     @php
-        $users = App\Models\User::select('id','name','email','phone_number',)->paginate(3);
-
         $headers = [
             ['key' => 'id', 'label' => '#'],
             ['key' => 'name', 'label' => 'Name'],
