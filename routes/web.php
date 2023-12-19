@@ -21,12 +21,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Welcome::class);
-Route::get('/login', LoginForm::class);
+Route::get('/', Welcome::class)->name('welcome');
+Route::get('/login', LoginForm::class)->name('login');
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/administrators', Administrators::class);
-    Route::get('/teachers', Teachers::class);
-    Route::get('/students', Students::class);
-    Route::get('/statistics', Statistics::class);
-    Route::get('/payments', Payments::class);
+    Route::get('/administrators', Administrators::class)->name('administrators');
+    Route::get('/teachers', Teachers::class)->name('teachers');
+    Route::get('/students', Students::class)->name('students');
+    Route::get('/statistics', Statistics::class)->name('statistics');
+    Route::get('/payments', Payments::class)->name('payments');
+
 });
