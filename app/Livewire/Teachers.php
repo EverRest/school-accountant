@@ -47,7 +47,7 @@ class Teachers extends Component
      */
     public function mount(): void
     {
-        $this->users = $this->getStudents();
+        $this->users = $this->getTeachers();
     }
 
     /**
@@ -59,7 +59,7 @@ class Teachers extends Component
     public function delete(User $user): void
     {
         $this->userService->destroy($user);
-        $this->users = $this->getStudents();
+        $this->users = $this->getTeachers();
     }
 
     /**
@@ -73,8 +73,8 @@ class Teachers extends Component
     /**
      * @return Collection
      */
-    protected function getStudents(): Collection
+    protected function getTeachers(): Collection
     {
-        return $this->userService->getUsersByRoleCode(RoleEnum::Student->value);
+        return $this->userService->getUsersByRoleCode(RoleEnum::Teacher->value);
     }
 }

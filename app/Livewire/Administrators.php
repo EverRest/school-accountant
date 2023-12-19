@@ -11,6 +11,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Throwable;
 
 class Administrators extends Component
 {
@@ -46,7 +47,7 @@ class Administrators extends Component
      */
     public function mount(): void
     {
-        $this->users = $this->getStudents();
+        $this->users = $this->getAdministrators();
     }
 
     /**
@@ -58,7 +59,7 @@ class Administrators extends Component
     public function delete(User $user): void
     {
         $this->userService->destroy($user);
-        $this->users = $this->getStudents();
+        $this->users = $this->getAdministrators();
     }
 
     /**
@@ -72,8 +73,8 @@ class Administrators extends Component
     /**
      * @return Collection
      */
-    protected function getStudents(): Collection
+    protected function getAdministrators(): Collection
     {
-        return $this->userService->getUsersByRoleCode(RoleEnum::Student->value);
+        return $this->userService->getUsersByRoleCode(RoleEnum::Administrator->value);
     }
 }
