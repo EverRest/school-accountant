@@ -2,10 +2,10 @@
 declare(strict_types=1);
 namespace App\Livewire;
 
-class Students extends Users
+class CreateTeacher extends CreateUser
 {
     /**
      * @var string
      */
-    protected string $role = 'student';
+    public string $role = 'teacher';
 }

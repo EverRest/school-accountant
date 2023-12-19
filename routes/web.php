@@ -2,6 +2,9 @@
 declare(strict_types=1);
 
 use App\Livewire\Administrators;
+use App\Livewire\CreateAdministrator;
+use App\Livewire\CreateStudent;
+use App\Livewire\CreateTeacher;
 use App\Livewire\LoginForm;
 use App\Livewire\LogOut;
 use App\Livewire\Payments;
@@ -30,6 +33,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/teachers', Teachers::class)->name('teachers');
     Route::get('/students', Students::class)->name('students');
     Route::delete('/users/{user}')->name('users.delete');
+    Route::get('/administrators/create', CreateAdministrator::class)->name('administrators.create');
+    Route::get('/teachers/create', CreateTeacher::class)->name('teachers.create');
+    Route::get('/students/create', CreateStudent::class)->name('students.create');
     Route::get('/statistics', Statistics::class)->name('statistics');
     Route::get('/payments', Payments::class)->name('payments');
 });
