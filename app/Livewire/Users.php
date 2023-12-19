@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Livewire;
 
 use App\Models\User;
@@ -23,6 +24,11 @@ class Users extends Component
      * @var Collection
      */
     public Collection $users;
+
+    /**
+     * @var string
+     */
+    public string $search = '';
 
     /**
      * @var string
@@ -60,6 +66,19 @@ class Users extends Component
     public function mount(): void
     {
         $this->users = $this->getUsers();
+    }
+
+    /**
+     * @return void
+     */
+    public function searchQ(): void
+    {
+        if($this->search) {
+            $this->users = $this->userService->query()
+                ->where('name', 'like', "%$this->search%")
+                ->orWhere('email', 'like', "%$this->search%")
+                ->get();
+        }
     }
 
     /**

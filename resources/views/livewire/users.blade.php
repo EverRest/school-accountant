@@ -1,10 +1,10 @@
 <div>
     <x-header title="Teachers" subtitle="Check this on mobile">
         <x-slot:middle class="!justify-end">
-            <x-input icon="o-magnifying-glass" placeholder="Search..."/>
+            <x-input wire:model="search" icon="o-magnifying-glass" placeholder="Search..."/>
         </x-slot:middle>
         <x-slot:actions>
-            <x-button icon="o-funnel"/>
+            <x-button icon="o-funnel" class="btn-primary" wire:click="searchQ"/>
             <x-button icon="o-plus" class="btn-primary" wire:click="create"/>
         </x-slot:actions>
     </x-header>
@@ -14,12 +14,10 @@
         <strong>{{ $user->id }}</strong>
         @endscope
 
-        {{-- You can name the injected object as you wish  --}}
         @scope('cell_name', $stuff)
         <x-badge :value="$stuff->name" class="badge-info"/>
         @endscope
 
-        {{-- Notice the `dot` notation for nested attribute cell's slot --}}
         @scope('cell_phone_number', $user)
         <i>{{ $user->phone_number }}</i>
         @endscope
@@ -27,18 +25,14 @@
         @scope('cell_email', $user)
         <i>{{ $user->email }}</i>
         @endscope
-        {{--        @scope('cell_city.name', $user)--}}
-        {{--        <i>{{ $user->city->name }}</i>--}}
-        {{--        @endscope--}}
-
-        {{-- The `fakeColumn` does not exist to the actual object --}}
-        {{--    @scope('cell_fakeColumn', $user)--}}
-        {{--    <u>{{ $user->city->name }}</u>--}}
-        {{--    @endscope--}}
 
         @scope('actions', $user)
-        <x-button icon="o-trash" wire:click="delete({{ $user->id }})" spinner class="btn-sm"/>
-        <x-button icon="o-pencil" wire:click="edit({{ $user->id }})" spinner class="btn-sm"/>
+        <div class="d-flex align-items-center">
+            <x-dropdown>
+                <x-menu-item title="Edit" wire:click="edit({{ $user->id }})" icon="o-pencil" spinner class="btn-sm"/>
+                <x-menu-item title="Remove" wire:click="delete({{ $user->id }})" icon="o-trash" spinner class="btn-sm"/>
+            </x-dropdown>
+        </div>
         @endscope
 
     </x-table>
