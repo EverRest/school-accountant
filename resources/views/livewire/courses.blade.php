@@ -9,28 +9,24 @@
         </x-slot:actions>
     </x-header>
 
-    <x-table :headers="$headers" :rows="$users">
-        @scope('cell_id', $user)
-        <strong>{{ $user->id }}</strong>
+    <x-table :headers="$headers" :rows="$courses">
+        @scope('cell_id', $course)
+        <strong>{{ $course->id }}</strong>
         @endscope
 
-        @scope('cell_name', $user)
-        <x-badge :value="$user->name" class="badge-info"/>
+        @scope('cell_name', $course)
+        <x-badge :value="$course->name" class="badge-info"/>
         @endscope
 
-        @scope('cell_phone_number', $user)
-        <i>{{ $user->phone_number }}</i>
+        @scope('cell_creator', $course)
+        <x-badge :value="$course?->creatore?->name??''" class="badge-info"/>
         @endscope
 
-        @scope('cell_email', $user)
-        <i>{{ $user->email }}</i>
-        @endscope
-
-        @scope('actions', $user)
+        @scope('actions', $course)
         <div class="d-flex align-items-center">
             <x-dropdown>
-                <x-menu-item title="Edit" wire:click="edit({{ $user->id }})" icon="o-pencil" spinner class="btn-sm"/>
-                <x-menu-item title="Remove" wire:click="delete({{ $user->id }})" icon="o-trash" spinner class="btn-sm"/>
+                <x-menu-item title="Edit" wire:click="edit({{ $course->id }})" icon="o-pencil" spinner class="btn-sm"/>
+                <x-menu-item title="Remove" wire:click="delete({{ $course->id }})" icon="o-trash" spinner class="btn-sm"/>
             </x-dropdown>
         </div>
         @endscope

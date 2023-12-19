@@ -2,7 +2,9 @@
 declare(strict_types=1);
 
 use App\Livewire\Administrators;
+use App\Livewire\Courses;
 use App\Livewire\CreateAdministrator;
+use App\Livewire\CreateCourse;
 use App\Livewire\CreateStudent;
 use App\Livewire\CreateTeacher;
 use App\Livewire\LoginForm;
@@ -11,6 +13,7 @@ use App\Livewire\Payments;
 use App\Livewire\Statistics;
 use App\Livewire\Students;
 use App\Livewire\Teachers;
+use App\Livewire\UpdateCourse;
 use App\Livewire\UpdateUser;
 use App\Livewire\Welcome;
 use Illuminate\Support\Facades\Route;
@@ -29,12 +32,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Welcome::class)->name('welcome');
 Route::get('/login', LoginForm::class)->name('login');
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/courses/{course}/update', UpdateCourse::class)->name('courses.update');
+    Route::get('/courses/create', CreateCourse::class)->name('courses.create');
+    Route::get('/courses', Courses::class)->name('courses.list');
+    Route::delete('/courses/{course}')->name('courses.delete');
     Route::get('/log-out', LogOut::class)->name('log-out');
-    Route::get('/administrators', Administrators::class)->name('administrators');
-    Route::get('/teachers', Teachers::class)->name('teachers');
-    Route::get('/students', Students::class)->name('students');
+    Route::get('/administrators', Administrators::class)->name('administrators.list');
     Route::get('/administrators/create', CreateAdministrator::class)->name('administrators.create');
+    Route::get('/teachers', Teachers::class)->name('teachers.list');
     Route::get('/teachers/create', CreateTeacher::class)->name('teachers.create');
+    Route::get('/students', Students::class)->name('students.list');
     Route::get('/students/create', CreateStudent::class)->name('students.create');
     Route::delete('/users/{user}')->name('users.delete');
     Route::get('/users/{user}/update', UpdateUser::class)->name('users.update');

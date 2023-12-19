@@ -1,10 +1,9 @@
 <?php
 declare(strict_types=1);
-
 namespace App\Livewire;
 
-use App\Models\User;
-use App\Services\UserService;
+use App\Models\Course;
+use App\Services\CourseService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -15,14 +14,14 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Throwable;
 
-class Users extends Component
+class Courses extends Component
 {
     use WithPagination;
 
     /**
-     * @var Collection
+     * @var mixed
      */
-    public Collection $users;
+    public mixed $courses;
 
     /**
      * @var string
@@ -30,33 +29,22 @@ class Users extends Component
     public string $search = '';
 
     /**
-     * @var string
-     */
-    public string $createUrl = '';
-
-    /**
      * @var array
      */
     public array $headers = [
         ['key' => 'id', 'label' => '#'],
         ['key' => 'name', 'label' => 'Name'],
-        ['key' => 'email', 'label' => 'Email'],
-        ['key' => 'phone_number', 'label' => 'Phone Number'],
+        ['key' => 'creator', 'label' => 'Creator'],
     ];
 
     /**
-     * @var string
+     * @var CourseService
      */
-    protected string $role = '';
-
-    /**
-     * @var UserService
-     */
-    private UserService $userService;
+    private CourseService $courseService;
 
     public function __construct()
     {
-        $this->userService = new UserService();
+        $this->courseService = new CourseService();
     }
 
     /**
@@ -64,7 +52,7 @@ class Users extends Component
      */
     public function mount(): void
     {
-        $this->users = $this->getUsers();
+        $this->courses = $this->getCourses();
     }
 
     /**
@@ -72,24 +60,25 @@ class Users extends Component
      */
     public function searchQ(): void
     {
-        $q = $this->userService->query();
-        $this->users = $this->search ? $q->where('name', 'like', "%$this->search%")
-            ->orWhere('email', 'like', "%$this->search%")
-            ->whereHas('roles', fn($q) => $q->where('name', $this->role))
-            ->get() : $q->get();
-        $this->search = '';
+        $q = $this->courseService->query();
+        if ($this->search) {
+            $this->courses = $q->where('name', 'like', "%$this->search%")
+                ->get();
+        } else {
+            $this->courses = $q->get();
+        }
     }
 
     /**
-     * @param User $user
+     * @param Course $course
      *
      * @return void
      * @throws Throwable
      */
-    public function delete(User $user): void
+    public function delete(Course $course): void
     {
-        $this->userService->destroy($user);
-        $this->users = $this->getUsers();
+        $this->courseService->destroy($course);
+        $this->courses = $this->getCourses();
     }
 
     /**
@@ -97,17 +86,17 @@ class Users extends Component
      */
     public function create(): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        return redirect($this->createUrl);
+        return redirect('courses/create');
     }
 
     /**
-     * @param User $user
+     * @param Course $course
      *
      * @return void
      */
-    public function edit(User $user): void
+    public function edit(Course $course): void
     {
-        $this->redirectRoute('users.update', ['user' => $user]);
+        $this->redirectRoute('courses.update', ['course' => $course]);
     }
 
     /**
@@ -115,14 +104,14 @@ class Users extends Component
      */
     public function render(): Application|View|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('livewire.users');
+        return view('livewire.courses');
     }
 
     /**
      * @return Collection
      */
-    protected function getUsers(): Collection
+    protected function getCourses(): Collection
     {
-        return $this->userService->getUsersByRoleCode($this->role);
+        return $this->courseService->all()->get();
     }
 }
