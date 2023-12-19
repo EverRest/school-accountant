@@ -5,7 +5,7 @@
         </x-slot:middle>
         <x-slot:actions>
             <x-button icon="o-funnel"/>
-            <x-button icon="o-plus" class="btn-primary"/>
+            <x-button icon="o-plus" class="btn-primary" wire:click="create"/>
         </x-slot:actions>
     </x-header>
 
@@ -38,6 +38,7 @@
 
         @scope('actions', $user)
         <x-button icon="o-trash" wire:click="delete({{ $user->id }})" spinner class="btn-sm"/>
+        <x-button icon="o-pencil" wire:click="edit({{ $user->id }})" spinner class="btn-sm"/>
         @endscope
 
     </x-table>

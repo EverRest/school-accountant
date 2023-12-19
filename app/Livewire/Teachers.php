@@ -7,5 +7,10 @@ class Teachers extends Users
     /**
      * @var string
      */
+    public string $createUrl = 'teachers/create';
+
+    /**
+     * @var string
+     */
     protected string $role = 'teacher';
 }

@@ -1,15 +1,16 @@
 <?php
 declare(strict_types=1);
-
 namespace App\Livewire;
 
-use App\Enums\RoleEnum;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Throwable;
@@ -22,6 +23,11 @@ class Users extends Component
      * @var Collection
      */
     public Collection $users;
+
+    /**
+     * @var string
+     */
+    public string $createUrl = '';
 
     /**
      * @var array
@@ -66,6 +72,24 @@ class Users extends Component
     {
         $this->userService->destroy($user);
         $this->users = $this->getUsers();
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|Application|RedirectResponse|Redirector
+     */
+    public function create(): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    {
+        return redirect($this->createUrl);
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return void
+     */
+    public function edit(User $user): void
+    {
+        $this->redirectRoute('users.update', ['user' => $user]);
     }
 
     /**
