@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use App\Livewire\Administrators;
 use App\Livewire\LoginForm;
+use App\Livewire\LogOut;
 use App\Livewire\Payments;
 use App\Livewire\Statistics;
 use App\Livewire\Students;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Welcome::class)->name('welcome');
 Route::get('/login', LoginForm::class)->name('login');
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/log-out', LogOut::class)->name('log-out');
     Route::get('/administrators', Administrators::class)->name('administrators');
     Route::get('/teachers', Teachers::class)->name('teachers');
     Route::get('/students', Students::class)->name('students');
