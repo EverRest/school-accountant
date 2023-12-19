@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-
 namespace App\Livewire;
 
 use App\Models\User;
@@ -11,7 +10,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Throwable;
@@ -73,11 +71,14 @@ class Users extends Component
      */
     public function searchQ(): void
     {
-        if($this->search) {
-            $this->users = $this->userService->query()
-                ->where('name', 'like', "%$this->search%")
+        $q = $this->userService->query();
+        if ($this->search) {
+            $this->users = $q->where('name', 'like', "%$this->search%")
                 ->orWhere('email', 'like', "%$this->search%")
+                ->whereHas('roles', fn($q) => $q->where('name', $this->role))
                 ->get();
+        } else {
+            $this->users = $q->get();
         }
     }
 
