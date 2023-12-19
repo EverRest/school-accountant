@@ -29,6 +29,6 @@ class UserService extends AbstractCRUDService
      */
     public function getUsersByRoleCodePaginated(string $code = '', int $perPage = 10): mixed
     {
-        return $this->model::role($code)->paginate($perPage);
+        return $this->model::role($code)->get();
     }
 }

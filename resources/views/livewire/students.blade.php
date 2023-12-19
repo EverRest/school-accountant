@@ -9,16 +9,7 @@
         </x-slot:actions>
     </x-header>
 
-    @php
-        $headers = [
-            ['key' => 'id', 'label' => '#'],
-            ['key' => 'name', 'label' => 'Name'],
-            ['key' => 'email', 'label' => 'Email'],
-            ['key' => 'phone_number', 'label' => 'Phone}'],
-        ];
-    @endphp
-
-    <x-table :headers="$headers" :rows="$users" with-pagination>
+    <x-table :headers="$headers" :rows="$users">
         @scope('cell_id', $user)
         <strong>{{ $user->id }}</strong>
         @endscope

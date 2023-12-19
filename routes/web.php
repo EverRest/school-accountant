@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/administrators', Administrators::class)->name('administrators');
     Route::get('/teachers', Teachers::class)->name('teachers');
     Route::get('/students', Students::class)->name('students');
+    Route::delete('/users/{user}')->name('users.delete');
     Route::get('/statistics', Statistics::class)->name('statistics');
     Route::get('/payments', Payments::class)->name('payments');
-
 });
