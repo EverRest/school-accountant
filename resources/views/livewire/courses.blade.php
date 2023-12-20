@@ -19,14 +19,15 @@
         @endscope
 
         @scope('cell_creator', $course)
-        <x-badge :value="$course?->creatore?->name??''" class="badge-info"/>
+        <x-badge :value="$course?->creator?->name"/>
         @endscope
 
         @scope('actions', $course)
         <div class="d-flex align-items-center">
             <x-dropdown>
                 <x-menu-item title="Edit" wire:click="edit({{ $course->id }})" icon="o-pencil" spinner class="btn-sm"/>
-                <x-menu-item title="Remove" wire:click="delete({{ $course->id }})" icon="o-trash" spinner class="btn-sm"/>
+                <x-menu-item title="Remove" wire:click="delete({{ $course->id }})" icon="o-trash" spinner
+                             class="btn-sm"/>
             </x-dropdown>
         </div>
         @endscope

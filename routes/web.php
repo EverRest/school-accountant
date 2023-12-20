@@ -8,6 +8,7 @@ use App\Livewire\CreateCourse;
 use App\Livewire\CreateGroup;
 use App\Livewire\CreateStudent;
 use App\Livewire\CreateTeacher;
+use App\Livewire\Groups;
 use App\Livewire\LoginForm;
 use App\Livewire\LogOut;
 use App\Livewire\Payments;
@@ -51,4 +52,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/payments', Payments::class)->name('payments');
     Route::get('/groups/create', CreateGroup::class)->name('groups.create');
     Route::get('/groups/{group}/update', UpdateGroup::class)->name('groups.update');
+    Route::get('/groups', Groups::class)->name('groups.list');
 });
