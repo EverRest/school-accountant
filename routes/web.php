@@ -11,6 +11,9 @@ use App\Livewire\CreateTeacher;
 use App\Livewire\Groups;
 use App\Livewire\LoginForm;
 use App\Livewire\LogOut;
+use App\Livewire\Packages;
+use App\Livewire\PaymentIncome;
+use App\Livewire\PaymentOutcome;
 use App\Livewire\Payments;
 use App\Livewire\Statistics;
 use App\Livewire\Students;
@@ -54,4 +57,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/groups/{group}/update', UpdateGroup::class)->name('groups.update');
     Route::get('/groups', Groups::class)->name('groups.list');
     Route::delete('/groups/{group}')->name('groups.delete');
+    Route::get('/packages', Packages::class)->name('packages.list');
+    Route::get('/income', PaymentIncome::class)->name('payments.income');
+    Route::get('/outcome', PaymentOutcome::class)->name('payments.outcome');
 });
