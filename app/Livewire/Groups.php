@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use App\Models\Course;
 use App\Models\Group;
-use App\Services\CourseService;
 use App\Services\GroupService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -73,14 +72,14 @@ class Groups extends Component
     }
 
     /**
-     * @param Course $course
+     * @param Group $group
      *
      * @return void
      * @throws Throwable
      */
-    public function delete(Course $course): void
+    public function delete(Group $group): void
     {
-        $this->groupService->destroy($course);
+        $this->groupService->destroy($group);
         $this->groups = $this->getGroups();
     }
 

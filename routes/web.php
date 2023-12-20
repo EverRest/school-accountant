@@ -53,4 +53,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/groups/create', CreateGroup::class)->name('groups.create');
     Route::get('/groups/{group}/update', UpdateGroup::class)->name('groups.update');
     Route::get('/groups', Groups::class)->name('groups.list');
+    Route::delete('/groups/{group}')->name('groups.delete');
 });

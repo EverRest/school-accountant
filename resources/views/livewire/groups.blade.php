@@ -1,5 +1,5 @@
 <div>
-    <x-header title="Teachers" subtitle="Check this on mobile">
+    <x-header title="Groups" subtitle="List of groups">
         <x-slot:middle class="!justify-end">
             <x-input wire:model="search" icon="o-magnifying-glass" placeholder="Search..."/>
         </x-slot:middle>
