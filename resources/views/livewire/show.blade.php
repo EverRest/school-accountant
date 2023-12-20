@@ -4,13 +4,13 @@
     <div class="container my-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <!-- Assuming 'x-mary-card' is a card component from mary-ui -->
-                <x-mary-card>
+                <!-- Assuming 'x-card' is a card component from mary-ui -->
+                <x-card>
                     <x-slot name="header">
                         <h3>Item Details</h3>
                     </x-slot>
 
-                    <x-mary-card-body>
+                    <x-card-body>
                         <div class="mb-3">
                             <strong>Name:</strong>
                             {{ $item->name }}
@@ -20,14 +20,14 @@
                             {{ $item->description }}
                         </div>
                         <!-- Add more fields as needed -->
-                    </x-mary-card-body>
+                    </x-card-body>
 
-                    <x-mary-card-footer>
+                    <x-card-footer>
                         <a href="{{ route('items.index') }}" class="btn btn-primary">
                             Back to List
                         </a>
-                    </x-mary-card-footer>
-                </x-mary-card>
+                    </x-card-footer>
+                </x-card>
             </div>
         </div>
     </div>

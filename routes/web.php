@@ -15,6 +15,7 @@ use App\Livewire\Packages;
 use App\Livewire\PaymentIncome;
 use App\Livewire\PaymentOutcome;
 use App\Livewire\Payments;
+use App\Livewire\Reports;
 use App\Livewire\Statistics;
 use App\Livewire\Students;
 use App\Livewire\Teachers;
@@ -60,4 +61,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/packages', Packages::class)->name('packages.list');
     Route::get('/income', PaymentIncome::class)->name('payments.income');
     Route::get('/outcome', PaymentOutcome::class)->name('payments.outcome');
+    Route::get('/reports', Reports::class)->name('payments.reports');
 });
