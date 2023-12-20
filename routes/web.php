@@ -65,6 +65,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/groups', Groups::class)->name('groups.list');
     Route::delete('/groups/{group}')->name('groups.delete');
     Route::get('/packages', Packages::class)->name('packages.list');
+    Route::get('/packages/create', CreateGroup::class)->name('packages.create');
+    Route::get('/packages/{package}/update', UpdateGroup::class)->name('packages.update');
+    Route::get('/packages/{package}', Group::class)->name('packages.show');
+    Route::delete('/packages/{package}')->name('packages.delete');
     Route::get('/income', PaymentIncome::class)->name('payments.income');
     Route::get('/outcome', PaymentOutcome::class)->name('payments.outcome');
     Route::get('/reports', Reports::class)->name('payments.reports');
