@@ -22,6 +22,7 @@ use App\Livewire\Teachers;
 use App\Livewire\UpdateCourse;
 use App\Livewire\UpdateGroup;
 use App\Livewire\UpdateUser;
+use App\Livewire\User;
 use App\Livewire\Welcome;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/students', Students::class)->name('students.list');
     Route::get('/students/create', CreateStudent::class)->name('students.create');
     Route::delete('/users/{user}')->name('users.delete');
+    Route::get('/users/{user}', User::class)->name('users.show');
     Route::get('/users/{user}/update', UpdateUser::class)->name('users.update');
     Route::get('/statistics', Statistics::class)->name('statistics');
     Route::get('/payments', Payments::class)->name('payments');

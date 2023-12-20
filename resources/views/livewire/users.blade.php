@@ -29,7 +29,8 @@
         @scope('actions', $user)
         <div class="d-flex align-items-center">
             <x-dropdown>
-                <x-menu-item title="Edit" wire:click="edit({{ $user->id }})" icon="o-pencil" spinner class="btn-sm"/>
+                <x-menu-item title="View" link="/users/{{ $user->id }}" icon="o-eye" spinner class="btn-sm"/>
+                <x-menu-item title="Edit" link="/users/{{ $user->id }}/update"  wire:click="edit({{ $user->id }})" icon="o-pencil" spinner class="btn-sm"/>
                 <x-menu-item title="Remove" wire:click="delete({{ $user->id }})" icon="o-trash" spinner class="btn-sm"/>
             </x-dropdown>
         </div>

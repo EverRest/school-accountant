@@ -100,16 +100,6 @@ class Users extends Component
     }
 
     /**
-     * @param User $user
-     *
-     * @return void
-     */
-    public function edit(User $user): void
-    {
-        $this->redirectRoute('users.update', ['user' => $user]);
-    }
-
-    /**
      * @return \Illuminate\Contracts\Foundation\Application|Factory|View|Application
      */
     public function render(): Application|View|Factory|\Illuminate\Contracts\Foundation\Application

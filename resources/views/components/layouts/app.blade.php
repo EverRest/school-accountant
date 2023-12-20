@@ -31,7 +31,7 @@
                 <x-menu-item title="Courses" icon="o-pencil-square" link="/courses"/>
                 <x-menu-item title="Groups" icon="o-rectangle-group" link="/groups"/>
                 <x-menu-item title="Packages" icon="o-circle-stack" link="/packages"/>
-                <x-menu-sub title="Payments" icon="o-chart-pie">
+                <x-menu-sub title="Payments" icon="o-currency-dollar">
                     <x-menu-item title="Income" icon="o-arrow-down-tray" link="/income"/>
                     <x-menu-item title="Outcome" icon="o-arrow-up-tray" link="/outcome"/>
                     <x-menu-item title="Reports" icon="o-chart-bar-square" link="/reports"/>
@@ -41,14 +41,14 @@
                     <x-menu-item title="Teachers" icoaddedn="o-users" link="####"/>
                     <x-menu-item title="Students" icon="o-user-group" link="####"/>
                 </x-menu-sub>
-{{--                <x-menu-sub title="Reports" icon="o-clipboard-document-check">--}}
-{{--                    <x-menu-item title="Wifi" icon="o-wifi" link="####"/>--}}
-{{--                    <x-menu-item title="Archives" icon="o-archive-box" link="####"/>--}}
-{{--                </x-menu-sub>--}}
-{{--                <x-menu-sub title="Settings" icon="o-cog-6-tooth">--}}
-{{--                    <x-menu-item title="Wifi" icon="o-wifi" link="####"/>--}}
-{{--                    <x-menu-item title="Archives" icon="o-archive-box" link="####"/>--}}
-{{--                </x-menu-sub>--}}
+                {{--                <x-menu-sub title="Reports" icon="o-clipboard-document-check">--}}
+                {{--                    <x-menu-item title="Wifi" icon="o-wifi" link="####"/>--}}
+                {{--                    <x-menu-item title="Archives" icon="o-archive-box" link="####"/>--}}
+                {{--                </x-menu-sub>--}}
+                {{--                <x-menu-sub title="Settings" icon="o-cog-6-tooth">--}}
+                {{--                    <x-menu-item title="Wifi" icon="o-wifi" link="####"/>--}}
+                {{--                    <x-menu-item title="Archives" icon="o-archive-box" link="####"/>--}}
+                {{--                </x-menu-sub>--}}
             @else
                 <x-menu-item title="Login" icon="o-user-plus" link="/login"/>
             @endif
