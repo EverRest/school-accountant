@@ -7,8 +7,6 @@ use App\Services\CourseService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -79,24 +77,6 @@ class Courses extends Component
     {
         $this->courseService->destroy($course);
         $this->courses = $this->getCourses();
-    }
-
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|Application|RedirectResponse|Redirector
-     */
-    public function create(): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
-    {
-        return redirect('courses/create');
-    }
-
-    /**
-     * @param Course $course
-     *
-     * @return void
-     */
-    public function edit(Course $course): void
-    {
-        $this->redirectRoute('courses.update', ['course' => $course]);
     }
 
     /**

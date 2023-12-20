@@ -7,6 +7,7 @@
             placeholder="Input name"
             error="{{ $errors->first('name') }}"
         />
+        <x-select label="Select Course" icon="o-pencil" option-value="id" :options="$courses" wire:model="selectedCourse" inline/>
         <x-button type="submit" label="Update Course"/>
     </form>
 

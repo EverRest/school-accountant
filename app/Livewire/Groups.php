@@ -2,14 +2,11 @@
 declare(strict_types=1);
 namespace App\Livewire;
 
-use App\Models\Course;
 use App\Models\Group;
 use App\Services\GroupService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -81,24 +78,6 @@ class Groups extends Component
     {
         $this->groupService->destroy($group);
         $this->groups = $this->getGroups();
-    }
-
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|Application|RedirectResponse|Redirector
-     */
-    public function create(): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
-    {
-        return redirect('groups/create');
-    }
-
-    /**
-     * @param Group $group
-     *
-     * @return void
-     */
-    public function edit(Group $group): void
-    {
-        $this->redirectRoute('groups.update', ['group' => $group]);
     }
 
     /**

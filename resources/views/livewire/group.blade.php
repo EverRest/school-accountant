@@ -3,25 +3,21 @@
         <div class="col-md-8">
             <x-card>
                 <x-slot name="header">
-                    <h3>User Details</h3>
+                    <h3>Group Details</h3>
                 </x-slot>
                 <x-slot:figure>
                     <div>
                         <div class="mb-3">
                             <strong>Name:</strong>
-                            {{ $user->name }}
+                            {{ $group->name }}
                         </div>
                         <div class="mb-3">
-                            <strong>Email:</strong>
-                            {{ $user->email }}
+                            <strong>Creator:</strong>
+                            {{ $group->creator?->name ?? '' }}
                         </div>
                         <div class="mb-3">
-                            <strong>Phone number:</strong>
-                            {{ $user->phone_number }}
-                        </div>
-                        <div class="mb-3">
-                            <strong>Role:</strong>
-                            {{ $role }}
+                            <strong>Course:</strong>
+                            {{ $group->course?->name ?? '' }}
                         </div>
                     </div>
                 </x-slot:figure>
@@ -30,8 +26,9 @@
                     <x-icon name="o-heart" class="cursor-pointer"/>
                 </x-slot:menu>
                 <x-slot:actions>
-                    <x-button link="{{ $backUrl }}" label="Back to List" class="btn-success"/>
-                    <x-button link="{{ route('users.update', ['user' => $user]) }}" label="Update" class="btn-warning"/>
+                    <x-button link="{{ route('groups.list') }}" label="Back to List" class="btn-success"/>
+                    <x-button link="{{ route('groups.update', ['group' => $group]) }}" label="Update"
+                              class="btn-warning"/>
                 </x-slot:actions>
             </x-card>
         </div>

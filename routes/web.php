@@ -2,12 +2,14 @@
 declare(strict_types=1);
 
 use App\Livewire\Administrators;
+use App\Livewire\Course;
 use App\Livewire\Courses;
 use App\Livewire\CreateAdministrator;
 use App\Livewire\CreateCourse;
 use App\Livewire\CreateGroup;
 use App\Livewire\CreateStudent;
 use App\Livewire\CreateTeacher;
+use App\Livewire\Group;
 use App\Livewire\Groups;
 use App\Livewire\LoginForm;
 use App\Livewire\LogOut;
@@ -43,6 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/courses/{course}/update', UpdateCourse::class)->name('courses.update');
     Route::get('/courses/create', CreateCourse::class)->name('courses.create');
     Route::get('/courses', Courses::class)->name('courses.list');
+    Route::get('/courses/{course}', Course::class)->name('courses.show');
     Route::delete('/courses/{course}')->name('courses.delete');
     Route::get('/log-out', LogOut::class)->name('log-out');
     Route::get('/administrators', Administrators::class)->name('administrators.list');
@@ -58,6 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/payments', Payments::class)->name('payments');
     Route::get('/groups/create', CreateGroup::class)->name('groups.create');
     Route::get('/groups/{group}/update', UpdateGroup::class)->name('groups.update');
+    Route::get('/groups/{group}', Group::class)->name('groups.show');
     Route::get('/groups', Groups::class)->name('groups.list');
     Route::delete('/groups/{group}')->name('groups.delete');
     Route::get('/packages', Packages::class)->name('packages.list');

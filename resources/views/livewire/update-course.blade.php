@@ -7,8 +7,7 @@
             placeholder="Input name"
             error="{{ $errors->first('name') }}"
         />
-        <x-select label="Select Courses" icon="o-pencil" :options="$groups" wire:model="selectedGroup" inline />
-        <x-button type="submit" label="Update Group"/>
+        <x-button type="submit" label="Update Course"/>
     </form>
 
     @if (session()->has('message'))
