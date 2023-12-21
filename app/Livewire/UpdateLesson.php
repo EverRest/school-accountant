@@ -1,8 +1,9 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Livewire;
 
 use App\Models\Lesson;
+use App\Services\GroupService;
 use App\Services\LessonService;
 use Livewire\Component;
 
@@ -12,6 +13,11 @@ class UpdateLesson extends Component
      * @var ?Lesson
      */
     public ?Lesson $lesson = null;
+
+    /**
+     * @var mixed
+     */
+    public mixed $groups;
 
     /**
      * @var ?string
@@ -26,6 +32,7 @@ class UpdateLesson extends Component
     public function __construct()
     {
         $this->lessonService = new LessonService();
+        $this->groups = (new GroupService())->all()->get();
     }
 
     /**
