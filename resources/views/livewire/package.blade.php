@@ -17,11 +17,11 @@
                         </div>
                         <div class="mb-3">
                             <strong>Lessons:</strong>
-                            {{ intval($package->cout_lessons) }}
+                            {{ $package->cout_lessons }}
                         </div>
                         <div class="mb-3">
                             <strong>Price:</strong>
-                            {{ floatval($package->price) }}
+                            {{ $package->price }}
                         </div>
                     </div>
                 </x-slot:figure>

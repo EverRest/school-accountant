@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace App\Services;
 
-class PackageService
+class PackageService extends AbstractCRUDService
 {
     /**
      * @var string

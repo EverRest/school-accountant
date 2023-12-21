@@ -1,5 +1,5 @@
 <div>
-    <x-header title="Groups" subtitle="List of packages">
+    <x-header title="Packages" subtitle="List of packages">
         <x-slot:middle class="!justify-end">
             <x-input wire:model="search" icon="o-magnifying-glass" placeholder="Search..."/>
         </x-slot:middle>
@@ -19,11 +19,11 @@
         @endscope
 
         @scope('cell_count_lesson', $package)
-        <x-badge :value="{{intval($package->count_lesson)}}"/>
+        <x-badge :value="$package->count_lesson"/>
         @endscope
 
         @scope('cell_creator', $package)
-        <x-badge :value="{{floatval($package->price)}}"/>
+        <x-badge :value="$package->price"/>
         @endscope
 
         @scope('actions', $package)
