@@ -22,7 +22,7 @@ class RolesSeeder extends Seeder
         foreach (self::ROLES as $role) {
             Role::firstOrCreate([
                 'name' => $role,
-                'guard_name' => $role,
+                'guard_name' => 'web',
             ]);
         }
     }
