@@ -7,8 +7,6 @@ use App\Services\UserService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -89,14 +87,6 @@ class Users extends Component
     {
         $this->userService->destroy($user);
         $this->users = $this->getUsers();
-    }
-
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|Application|RedirectResponse|Redirector
-     */
-    public function create(): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
-    {
-        return redirect($this->createUrl);
     }
 
     /**

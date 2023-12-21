@@ -6,7 +6,8 @@
                 <x-input wire:model="email" type="email" class="form-control" id="email"
                          placeholder="Enter email"/>
                 <x-input wire:model="price" type="price" class="form-control" id="price" placeholder="Enter price"/>
-                <x-input wire:model="phone_number" type="text" class="form-control" id="phone_number" placeholder="Enter Phone Number"/>
+                <x-input wire:model="phone_number" type="text" class="form-control" id="phone_number"
+                         placeholder="Enter Phone Number"/>
                 @if (session()->has('error'))
                     <x-alert icon="o-exclamation-triangle" class="alert-danger">
                         {{ session('error') }}
@@ -16,6 +17,11 @@
                     <x-button label="Update User" class="btn-primary" type="submit" spinner="save"/>
                 </x-slot:actions>
             </x-form>
+            @if (session()->has('message'))
+                <x-alert type="success">
+                    {{ session('message') }}
+                </x-alert>
+            @endif
         </div>
     </div>
 </div>

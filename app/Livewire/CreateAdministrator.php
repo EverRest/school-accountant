@@ -8,4 +8,9 @@ class CreateAdministrator extends CreateUser
      * @var string
      */
     public string $role = 'administrator';
+
+    /**
+     * @var string
+     */
+    protected string $backRoute = 'administrators.list';
 }

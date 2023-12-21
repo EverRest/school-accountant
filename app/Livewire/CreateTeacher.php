@@ -8,4 +8,9 @@ class CreateTeacher extends CreateUser
      * @var string
      */
     public string $role = 'teacher';
+
+    /**
+     * @var string
+     */
+    protected string $backRoute = 'teachers.lis';
 }

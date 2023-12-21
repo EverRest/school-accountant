@@ -8,4 +8,9 @@ class CreateStudent extends CreateUser
      * @var string
      */
     public string $role = 'student';
+
+    /**
+     * @var string
+     */
+    protected string $backRoute = 'students.list';
 }

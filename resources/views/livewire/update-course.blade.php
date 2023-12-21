@@ -12,6 +12,11 @@
                     <x-button label="Update Course" class="btn-primary" type="submit" spinner="save"/>
                 </x-slot:actions>
             </x-form>
+            @if (session()->has('message'))
+                <x-alert type="success">
+                    {{ session('message') }}
+                </x-alert>
+            @endif
         </div>
     </div>
 </div>

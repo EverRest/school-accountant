@@ -37,6 +37,8 @@ abstract class CreateUser extends Component
      */
     public string $phone_number = '';
 
+    protected string $backRoute = '';
+
     /**
      * @var UserService
      */
@@ -73,8 +75,8 @@ abstract class CreateUser extends Component
         ]);
         $user->assignRole($this->role);
         $this->reset();
-
         session()->flash('message', 'User successfully created.');
+        $this->redirectRoute($this->backRoute);
     }
 
     /**
