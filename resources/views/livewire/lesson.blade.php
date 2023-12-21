@@ -8,10 +8,6 @@
                 <x-slot:figure>
                     <div>
                         <div class="mb-3">
-                            <strong>Name:</strong>
-                            {{ $lesson->name }}
-                        </div>
-                        <div class="mb-3">
                             <strong>Creator:</strong>
                             {{ $lesson->creator?->name ?? '' }}
                         </div>
@@ -21,7 +17,7 @@
                         </div>
                         <div class="mb-3">
                             <strong>Teacher:</strong>
-                            {{ $lesson->teacher?->name ?? '' }}
+                            {{ $lesson->teacher->user?->name ?? '' }}
                         </div>
                         <div class="mb-3">
                             <strong>Date:</strong>

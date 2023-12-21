@@ -92,6 +92,6 @@ class Courses extends Component
      */
     protected function getCourses(): Collection
     {
-        return $this->courseService->all()->get();
+        return $this->courseService->all()->with(['creator'])->get();
     }
 }

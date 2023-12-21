@@ -80,7 +80,8 @@ abstract class AbstractIndexService
      */
     public function all(array $filters = []): EloquentBuilder
     {
-        $q =$this->query();
+        $q = $this->query();
+        $this->with($q);
 
         return $this->filter($q, $filters);
     }

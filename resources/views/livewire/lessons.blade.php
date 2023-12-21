@@ -14,12 +14,12 @@
         <strong>{{ $lesson->id }}</strong>
         @endscope
 
-        @scope('cell_name', $lesson)
-        <x-badge :value="$lesson->name" class="badge-info"/>
+        @scope('cell_course', $lesson)
+        <x-badge :value="$lesson?->group?->course?->name"/>
         @endscope
 
-        @scope('cell_course', $lesson)
-        <x-badge :value="$lesson?->course?->name"/>
+        @scope('cell_group', $lesson)
+        <x-badge :value="$lesson?->group?->name"/>
         @endscope
 
         @scope('cell_creator', $lesson)
