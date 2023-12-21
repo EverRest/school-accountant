@@ -26,6 +26,10 @@
         <x-badge :value="$lesson?->creator?->name??''"/>
         @endscope
 
+        @scope('cell_date', $lesson)
+        <x-badge :value="$lesson->date"/>
+        @endscope
+
         @scope('actions', $lesson)
         <div class="d-flex align-items-center">
             <x-dropdown>

@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Livewire;
 
 use Illuminate\Contracts\Foundation\Application;
@@ -19,6 +20,6 @@ class LogOut
         Session::invalidate();
         Session::regenerateToken();
 
-        return redirect('/login');
+        return redirect(route('login'));
     }
 }

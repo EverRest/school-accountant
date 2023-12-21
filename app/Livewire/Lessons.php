@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Livewire;
 
 use App\Models\Group;
@@ -10,6 +10,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Throwable;
 
 class Lessons extends Component
 {
@@ -19,6 +20,11 @@ class Lessons extends Component
      * @var mixed
      */
     public mixed $lessons;
+
+    /**
+     * @var mixed
+     */
+    public mixed $groups;
 
     /**
      * @var string
