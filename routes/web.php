@@ -11,6 +11,7 @@ use App\Livewire\CreateStudent;
 use App\Livewire\CreateTeacher;
 use App\Livewire\Group;
 use App\Livewire\Groups;
+use App\Livewire\Lessons;
 use App\Livewire\LoginForm;
 use App\Livewire\LogOut;
 use App\Livewire\Packages;
@@ -42,33 +43,48 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Welcome::class)->name('welcome');
 Route::get('/login', LoginForm::class)->name('login');
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/courses/{course}/update', UpdateCourse::class)->name('courses.update');
-    Route::get('/courses/create', CreateCourse::class)->name('courses.create');
-    Route::get('/courses', Courses::class)->name('courses.list');
-    Route::get('/courses/{course}', Course::class)->name('courses.show');
-    Route::delete('/courses/{course}')->name('courses.delete');
     Route::get('/log-out', LogOut::class)->name('log-out');
-    Route::get('/administrators', Administrators::class)->name('administrators.list');
-    Route::get('/administrators/create', CreateAdministrator::class)->name('administrators.create');
-    Route::get('/teachers', Teachers::class)->name('teachers.list');
-    Route::get('/teachers/create', CreateTeacher::class)->name('teachers.create');
-    Route::get('/students', Students::class)->name('students.list');
-    Route::get('/students/create', CreateStudent::class)->name('students.create');
-    Route::delete('/users/{user}')->name('users.delete');
-    Route::get('/users/{user}', User::class)->name('users.show');
-    Route::get('/users/{user}/update', UpdateUser::class)->name('users.update');
+    Route::group(['prefix' => 'courses'], function () {
+        Route::get('/{course}/update', UpdateCourse::class)->name('courses.update');
+        Route::get('/create', CreateCourse::class)->name('courses.create');
+        Route::get('', Courses::class)->name('courses.list');
+        Route::get('/{course}', Course::class)->name('courses.show');
+        Route::delete('/courses/{course}')->name('courses.delete');
+    });
+    Route::group(['prefix' => 'administrators'], function () {
+        Route::get('/', Administrators::class)->name('administrators.list');
+        Route::get('/create', CreateAdministrator::class)->name('administrators.create');
+    });
+    Route::group(['prefix' => 'teachers'], function () {
+        Route::get('/', Teachers::class)->name('teachers.list');
+        Route::get('/create', CreateTeacher::class)->name('teachers.create');
+    });
+    Route::group(['prefix' => 'students'], function () {
+        Route::get('/', Students::class)->name('students.list');
+        Route::get('/create', CreateStudent::class)->name('students.create');
+    });
+    Route::group(['prefix' => 'users'], function () {
+        Route::delete('/{user}')->name('users.delete');
+        Route::get('/{user}', User::class)->name('users.show');
+        Route::get('/{user}/update', UpdateUser::class)->name('users.update');
+    });
     Route::get('/statistics', Statistics::class)->name('statistics');
     Route::get('/payments', Payments::class)->name('payments');
-    Route::get('/groups/create', CreateGroup::class)->name('groups.create');
-    Route::get('/groups/{group}/update', UpdateGroup::class)->name('groups.update');
-    Route::get('/groups/{group}', Group::class)->name('groups.show');
-    Route::get('/groups', Groups::class)->name('groups.list');
-    Route::delete('/groups/{group}')->name('groups.delete');
-    Route::get('/packages', Packages::class)->name('packages.list');
-    Route::get('/packages/create', CreateGroup::class)->name('packages.create');
-    Route::get('/packages/{package}/update', UpdateGroup::class)->name('packages.update');
-    Route::get('/packages/{package}', Group::class)->name('packages.show');
-    Route::delete('/packages/{package}')->name('packages.delete');
+    Route::get('/lessons', Lessons::class)->name('lessons.list');
+    Route::group(['prefix' => 'groups'], function () {
+        Route::get('/create', CreateGroup::class)->name('groups.create');
+        Route::get('/{group}/update', UpdateGroup::class)->name('groups.update');
+        Route::get('/{group}', Group::class)->name('groups.show');
+        Route::get('/', Groups::class)->name('groups.list');
+        Route::delete('/{group}')->name('groups.delete');
+    });
+    Route::group(['prefix' => 'packages'], function () {
+        Route::get('/', Packages::class)->name('packages.list');
+        Route::get('/create', CreateGroup::class)->name('packages.create');
+        Route::get('/{package}/update', UpdateGroup::class)->name('packages.update');
+        Route::get('/{package}', Group::class)->name('packages.show');
+        Route::delete('/{package}')->name('packages.delete');
+    });
     Route::get('/income', PaymentIncome::class)->name('payments.income');
     Route::get('/outcome', PaymentOutcome::class)->name('payments.outcome');
     Route::get('/reports', Reports::class)->name('payments.reports');

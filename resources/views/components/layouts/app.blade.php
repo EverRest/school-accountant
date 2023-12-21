@@ -31,6 +31,7 @@
                 <x-menu-item title="Courses" icon="o-pencil-square" link="/courses"/>
                 <x-menu-item title="Groups" icon="o-rectangle-group" link="/groups"/>
                 <x-menu-item title="Packages" icon="o-circle-stack" link="/packages"/>
+                <x-menu-item title="Lessons" icon="o-academic-cap" link="/lessons"/>
                 <x-menu-sub title="Payments" icon="o-currency-dollar">
                     <x-menu-item title="Income" icon="o-arrow-down-tray" link="/income"/>
                     <x-menu-item title="Outcome" icon="o-arrow-up-tray" link="/outcome"/>
