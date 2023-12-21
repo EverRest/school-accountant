@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Course;
+use App\Models\Lesson;
 use Exception;
 use Illuminate\Database\Seeder;
 
-class CoursesSeeder extends Seeder
+class LessonsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class CoursesSeeder extends Seeder
      */
     public function run(): void
     {
-        Course::factory(20)->create();
+        Lesson::factory(20)->create();
     }
 }

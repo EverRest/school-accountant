@@ -7,10 +7,12 @@ use App\Livewire\Courses;
 use App\Livewire\CreateAdministrator;
 use App\Livewire\CreateCourse;
 use App\Livewire\CreateGroup;
+use App\Livewire\CreateLesson;
 use App\Livewire\CreateStudent;
 use App\Livewire\CreateTeacher;
 use App\Livewire\Group;
 use App\Livewire\Groups;
+use App\Livewire\Lesson;
 use App\Livewire\Lessons;
 use App\Livewire\LoginForm;
 use App\Livewire\LogOut;
@@ -24,6 +26,7 @@ use App\Livewire\Students;
 use App\Livewire\Teachers;
 use App\Livewire\UpdateCourse;
 use App\Livewire\UpdateGroup;
+use App\Livewire\UpdateLesson;
 use App\Livewire\UpdateUser;
 use App\Livewire\User;
 use App\Livewire\Welcome;
@@ -70,7 +73,13 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::get('/statistics', Statistics::class)->name('statistics');
     Route::get('/payments', Payments::class)->name('payments');
-    Route::get('/lessons', Lessons::class)->name('lessons.list');
+    Route::group(['prefix' => 'lessons'], function () {
+        Route::get('/create', CreateLesson::class)->name('lessons.create');
+        Route::get('/{lesson}/update', UpdateLesson::class)->name('lessons.update');
+        Route::get('/{lesson}', Lesson::class)->name('lessons.show');
+        Route::get('/', Lessons::class)->name('lessons.list');
+//        Route::delete('/{lesson}')->name('lessons.delete');
+    });
     Route::group(['prefix' => 'groups'], function () {
         Route::get('/create', CreateGroup::class)->name('groups.create');
         Route::get('/{group}/update', UpdateGroup::class)->name('groups.update');
