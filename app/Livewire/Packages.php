@@ -1,35 +1,36 @@
 <?php
 declare(strict_types=1);
-
 namespace App\Livewire;
 
+use App\Models\Group;
 use App\Services\PackageService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Throwable;
+use App\Models\Package as Model;
 
 class Packages extends Component
 {
     use WithPagination;
 
     /**
-     * @var PackageService
-     */
-    public PackageService $packageService;
-
-    /**
      * @var mixed
      */
-    public mixed $packages = null;
+    public mixed $packages;
 
     /**
      * @var string
      */
     public string $search = '';
+
+    /**
+     * @var PackageService
+     */
+    private PackageService $packageService;
 
     /**
      * @var array
@@ -38,13 +39,21 @@ class Packages extends Component
         ['key' => 'id', 'label' => '#'],
         ['key' => 'name', 'label' => 'Name'],
         ['key' => 'creator', 'label' => 'Creator'],
-        ['key' => 'count_lesson', 'label' => 'Lessons '],
         ['key' => 'price', 'label' => 'Price'],
+        ['key' => 'count_lesson', 'label' => 'Lessons'],
     ];
 
     public function __construct()
     {
         $this->packageService = new PackageService();
+    }
+
+    /**
+     * @return void
+     */
+    public function mount(): void
+    {
+        $this->packages = $this->getPackages();
     }
 
     /**
@@ -62,37 +71,29 @@ class Packages extends Component
     }
 
     /**
-     * @param Package $package
+     * @param Model $package
      *
      * @return void
      * @throws Throwable
      */
-    public function delete(Package $package): void
+    public function delete(Model $package): void
     {
         $this->packageService->destroy($package);
         $this->packages = $this->getPackages();
     }
 
     /**
-     * @return void
+     * @return \Illuminate\Contracts\Foundation\Application|Factory|View|Application
      */
-    public function mount(): void
-    {
-        $this->packages = $this->getPackages();
-    }
-
-    /**
-     * @return View|Application|Factory|\Illuminate\Contracts\Foundation\Application
-     */
-    public function render(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function render(): Application|View|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('livewire.packages');
     }
 
     /**
-     * @return array|Collection
+     * @return Collection
      */
-    private function getPackages(): array|Collection
+    protected function getPackages(): Collection
     {
         return $this->packageService->all()->get();
     }

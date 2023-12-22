@@ -37,19 +37,6 @@
                     <x-menu-item title="Outcome" icon="o-arrow-up-tray" link="/outcome"/>
                     <x-menu-item title="Reports" icon="o-chart-bar-square" link="/reports"/>
                 </x-menu-sub>
-                <x-menu-sub title="Attendee" icon="o-chart-pie">
-                    <x-menu-item title="Administrators" icon="o-user-circle" link="####"/>
-                    <x-menu-item title="Teachers" icoaddedn="o-users" link="####"/>
-                    <x-menu-item title="Students" icon="o-user-group" link="####"/>
-                </x-menu-sub>
-                {{--                <x-menu-sub title="Reports" icon="o-clipboard-document-check">--}}
-                {{--                    <x-menu-item title="Wifi" icon="o-wifi" link="####"/>--}}
-                {{--                    <x-menu-item title="Archives" icon="o-archive-box" link="####"/>--}}
-                {{--                </x-menu-sub>--}}
-                {{--                <x-menu-sub title="Settings" icon="o-cog-6-tooth">--}}
-                {{--                    <x-menu-item title="Wifi" icon="o-wifi" link="####"/>--}}
-                {{--                    <x-menu-item title="Archives" icon="o-archive-box" link="####"/>--}}
-                {{--                </x-menu-sub>--}}
             @else
                 <x-menu-item title="Login" icon="o-user-plus" link="/login"/>
             @endif

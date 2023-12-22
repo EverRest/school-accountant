@@ -5,7 +5,7 @@
         </x-slot:middle>
         <x-slot:actions>
             <x-button icon="o-funnel" class="btn-primary" wire:click="searchQ"/>
-            <x-button icon="o-plus" class="btn-primary" link={{route('packages.create')}}/>
+            <x-button icon="o-plus" class="btn-primary" link="{{route('packages.create')}}"/>
         </x-slot:actions>
     </x-header>
 
@@ -18,11 +18,15 @@
         <x-badge :value="$package->name" class="badge-info"/>
         @endscope
 
+        @scope('cell_creator', $package)
+        <strong>{{ $package->creator?->name ?? '' }}</strong>
+        @endscope
+
         @scope('cell_count_lesson', $package)
         <x-badge :value="$package->count_lesson"/>
         @endscope
 
-        @scope('cell_creator', $package)
+        @scope('cell_price', $package)
         <x-badge :value="$package->price"/>
         @endscope
 
