@@ -63,8 +63,8 @@ class UpdateGroup extends Component
     {
         $this->validate(['name' => 'sometimes|string|max:255',]);
         $this->groupService->update($this->group, ['name' => $this->name,'course_id' => $this->selectedCourse]);
-
         session()->flash('message', 'Group successfully updated.');
+        $this->redirectRoute(route('groups.list'));
     }
 
     /**

@@ -76,7 +76,7 @@ abstract class CreateUser extends Component
         $user->assignRole($this->role);
         $this->reset();
         session()->flash('message', 'User successfully created.');
-        $this->redirectRoute($this->backRoute);
+        $this->redirect(route($this->backRoute));
     }
 
     /**

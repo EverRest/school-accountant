@@ -17,7 +17,7 @@ class Package extends Model
     protected $fillable = [
         'creator_id',
         'name',
-        'count_lessons',
+        'count_lesson',
         'price',
     ];
 }

@@ -45,6 +45,7 @@ class CreateCourse extends Component
         ]);
         $this->reset();
         session()->flash('message', 'Course successfully created.');
+        $this->redirectRoute(route('courses.list'));
     }
 
     /**

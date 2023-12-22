@@ -91,6 +91,7 @@ class CreateLesson extends Component
             'date' =>  $this->date
         ]);
         $this->reset();
-        session()->flash('message', 'Course successfully created.');
+        session()->flash('message', 'Lesson successfully created.');
+        $this->redirectRoute(route('lessons.list'));
     }
 }

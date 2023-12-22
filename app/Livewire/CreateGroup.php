@@ -59,7 +59,8 @@ class CreateGroup extends Component
             'course_id' => $this->selectedCourse,
         ]);
         $this->reset();
-        session()->flash('message', 'Course successfully created.');
+        session()->flash('message', 'Group successfully created.');
+        $this->redirect(route('groups.list'));
     }
 
     /**

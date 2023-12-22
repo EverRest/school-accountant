@@ -1,17 +1,35 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Livewire;
 
 use App\Services\PackageService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Application;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Throwable;
 
 class Packages extends Component
 {
     use WithPagination;
+
+    /**
+     * @var PackageService
+     */
+    public PackageService $packageService;
+
+    /**
+     * @var mixed
+     */
+    public mixed $packages = null;
+
+    /**
+     * @var string
+     */
+    public string $search = '';
 
     /**
      * @var array
@@ -24,19 +42,43 @@ class Packages extends Component
         ['key' => 'price', 'label' => 'Price'],
     ];
 
-    /**
-     * @var mixed
-     */
-    public mixed $packages;
+    public function __construct()
+    {
+        $this->packageService = new PackageService();
+    }
 
     /**
-     * @param PackageService $packageService
-     *
      * @return void
      */
-    public function mount(PackageService $packageService): void
+    public function searchQ(): void
     {
-        $this->packages = $packageService->all()->get();
+        $q = $this->packageService->query();
+        if ($this->search) {
+            $this->packages = $q->where('name', 'like', "%$this->search%")
+                ->get();
+        } else {
+            $this->packages = $q->get();
+        }
+    }
+
+    /**
+     * @param Package $package
+     *
+     * @return void
+     * @throws Throwable
+     */
+    public function delete(Package $package): void
+    {
+        $this->packageService->destroy($package);
+        $this->packages = $this->getPackages();
+    }
+
+    /**
+     * @return void
+     */
+    public function mount(): void
+    {
+        $this->packages = $this->getPackages();
     }
 
     /**
@@ -45,5 +87,13 @@ class Packages extends Component
     public function render(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('livewire.packages');
+    }
+
+    /**
+     * @return array|Collection
+     */
+    private function getPackages(): array|Collection
+    {
+        return $this->packageService->all()->get();
     }
 }

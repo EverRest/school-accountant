@@ -5,7 +5,7 @@
         </x-slot:middle>
         <x-slot:actions>
             <x-button icon="o-funnel" class="btn-primary" wire:click="searchQ"/>
-            <x-button icon="o-plus" class="btn-primary" link="{{route('packages.create')}}"/>
+            <x-button icon="o-plus" class="btn-primary" link={{route('packages.create')}}/>
         </x-slot:actions>
     </x-header>
 
@@ -29,9 +29,9 @@
         @scope('actions', $package)
         <div class="d-flex align-items-center">
             <x-dropdown>
-                <x-menu-item title="View" link="{{route('packages.show', ['package' => $package])}}" icon="o-eye" spinner
+                <x-menu-item title="View" link={{route('packages.show', ['package' => $package])}} icon="o-eye" spinner
                              class="btn-sm"/>
-                <x-menu-item title="Edit" link="{{route('packages.update', ['package' => $package])}}" icon="o-pencil" spinner
+                <x-menu-item title="Edit" link={{route('packages.update', ['package' => $package])}} icon="o-pencil" spinner
                              class="btn-sm"/>
                 <x-menu-item title="Remove" wire:click="delete({{ $package->id }})" icon="o-trash" spinner
                              class="btn-sm"/>

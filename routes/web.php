@@ -8,6 +8,7 @@ use App\Livewire\CreateAdministrator;
 use App\Livewire\CreateCourse;
 use App\Livewire\CreateGroup;
 use App\Livewire\CreateLesson;
+use App\Livewire\CreatePackage;
 use App\Livewire\CreateStudent;
 use App\Livewire\CreateTeacher;
 use App\Livewire\Group;
@@ -27,9 +28,11 @@ use App\Livewire\Teachers;
 use App\Livewire\UpdateCourse;
 use App\Livewire\UpdateGroup;
 use App\Livewire\UpdateLesson;
+use App\Livewire\UpdatePackage;
 use App\Livewire\UpdateUser;
 use App\Livewire\User;
 use App\Livewire\Welcome;
+use App\Livewire\Package;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,7 +47,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', Welcome::class)->name('welcome');
-//Route::get('/', Welcome::class)->name('welcome');
 Route::get('/login', LoginForm::class)->name('login');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/log-out', LogOut::class)->name('log-out');
@@ -90,9 +92,9 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::group(['prefix' => 'packages'], function () {
         Route::get('/', Packages::class)->name('packages.list');
-        Route::get('/create', CreateGroup::class)->name('packages.create');
-        Route::get('/{package}/update', UpdateGroup::class)->name('packages.update');
-        Route::get('/{package}', Group::class)->name('packages.show');
+        Route::get('/create', CreatePackage::class)->name('packages.create');
+        Route::get('/{package}/update', UpdatePackage::class)->name('packages.update');
+        Route::get('/{package}', Package::class)->name('packages.show');
         Route::delete('/{package}')->name('packages.delete');
     });
     Route::get('/income', PaymentIncome::class)->name('payments.income');

@@ -78,7 +78,6 @@ class UpdateUser extends Component
             'email' => $this->email,
             'phone_number' => $this->phone_number,
         ]);
-
         session()->flash('message', 'User successfully updated.');
     }
 
