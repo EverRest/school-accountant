@@ -37,7 +37,15 @@ abstract class CreateUser extends Component
      */
     public string $phone_number = '';
 
+    /**
+     * @var string
+     */
     protected string $backRoute = '';
+
+    /**
+     * @var string
+     */
+    protected string $view = '';
 
     /**
      * @var UserService
@@ -84,6 +92,6 @@ abstract class CreateUser extends Component
      */
     public function render(): View|Factory|Application|\Illuminate\Contracts\Foundation\Application
     {
-        return view('livewire.create-user');
+        return view($this->view??'livewire.create-user');
     }
 }

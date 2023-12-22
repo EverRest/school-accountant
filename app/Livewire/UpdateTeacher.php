@@ -7,11 +7,12 @@ use App\Services\UserService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use App\Models\User;
 
-class UpdateUser extends Component
+class UpdateTeacher extends Component
 {
     /**
      * @var ?User
@@ -39,6 +40,16 @@ class UpdateUser extends Component
     public string $phone_number = '';
 
     /**
+     * @var float
+     */
+    public float $individual_lesson_salary = 0.00;
+
+    /**
+     * @var float
+     */
+    public float $group_lesson_salary = 0.00;
+
+    /**
      * @var UserService|null
      */
     private ?UserService $userService;
@@ -59,6 +70,8 @@ class UpdateUser extends Component
         $this->name = $user->name;
         $this->email = $user->email;
         $this->phone_number = $user->phone_number;
+        $this->group_lesson_salary = (float)$user->teacher?->group_lesson_salary;
+        $this->individual_lesson_salary = (float)$user->teacher?->individual_lesson_salary;
     }
 
     /**
@@ -71,15 +84,31 @@ class UpdateUser extends Component
             'email' => ['sometimes', 'email', Rule::unique('users')->ignore($this->user->id),],
             'password' => 'sometimes|min:6',
             'phone_number' => 'sometimes|string|max:255',
+            'group_lesson_salary' => 'sometimes|numeric|min:1',
+            'individual_lesson_salary' => 'sometimes|numeric|min:1',
 
         ]);
-        $this->userService->update($this->user, [
+        /**
+         * @var User $user
+         */
+        $user = $this->userService->update($this->user, [
             'name' => $this->name,
             'email' => $this->email,
             'phone_number' => $this->phone_number,
         ]);
-        session()->flash('message', 'User successfully updated.');
-        $this->redirect(route('administrators.list'));
+        $teacherAttributes = [];
+        if ($this->individual_lesson_salary) {
+            Arr::set($teacherAttributes, 'individual_lesson_salary', $this->individual_lesson_salary);
+        }
+        if ($this->group_lesson_salary) {
+            Arr::set($teacherAttributes, 'group_lesson_salary', $this->group_lesson_salary);
+        }
+        if (!empty($teacherAttributes)) {
+            $user->teacher()->update($teacherAttributes);
+        }
+
+        session()->flash('message', 'Teacher successfully updated.');
+        $this->redirect(route('teachers.list'));
     }
 
     /**
@@ -87,6 +116,6 @@ class UpdateUser extends Component
      */
     public function render(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('livewire.update-user');
+        return view('livewire.update-teacher');
     }
 }

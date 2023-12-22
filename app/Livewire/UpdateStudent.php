@@ -11,7 +11,7 @@ use Illuminate\Validation\Rule;
 use Livewire\Component;
 use App\Models\User;
 
-class UpdateUser extends Component
+class UpdateStudent extends Component
 {
     /**
      * @var ?User
@@ -39,6 +39,11 @@ class UpdateUser extends Component
     public string $phone_number = '';
 
     /**
+     * @var string
+     */
+    public string $parent = '';
+
+    /**
      * @var UserService|null
      */
     private ?UserService $userService;
@@ -59,6 +64,7 @@ class UpdateUser extends Component
         $this->name = $user->name;
         $this->email = $user->email;
         $this->phone_number = $user->phone_number;
+        $this->parent = $user->student?->parent ?? '';
     }
 
     /**
@@ -71,15 +77,24 @@ class UpdateUser extends Component
             'email' => ['sometimes', 'email', Rule::unique('users')->ignore($this->user->id),],
             'password' => 'sometimes|min:6',
             'phone_number' => 'sometimes|string|max:255',
+            'parent' => 'sometimes|string|min:2|max:255',
 
         ]);
-        $this->userService->update($this->user, [
+        /**
+         * @var User $user
+         */
+        $user = $this->userService->update($this->user, [
             'name' => $this->name,
             'email' => $this->email,
             'phone_number' => $this->phone_number,
         ]);
-        session()->flash('message', 'User successfully updated.');
-        $this->redirect(route('administrators.list'));
+        if ($this->parent) {
+            $user->student()->update([
+                'parent' => $this->parent,
+            ]);
+        }
+        session()->flash('message', 'Student successfully updated.');
+        $this->redirect(route('students.list'));
     }
 
     /**
@@ -87,6 +102,6 @@ class UpdateUser extends Component
      */
     public function render(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('livewire.update-user');
+        return view('livewire.update-student');
     }
 }

@@ -13,4 +13,9 @@ class CreateAdministrator extends CreateUser
      * @var string
      */
     protected string $backRoute = 'administrators.list';
+
+    /**
+     * @var string
+     */
+    protected string $view = 'livewire.create-user';
 }

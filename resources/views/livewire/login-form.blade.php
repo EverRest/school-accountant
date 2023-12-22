@@ -2,8 +2,8 @@
     <div class="card w-8/12 mx-12">
         <div class="card-body">
             <x-form wire:submit.prevent="submit">
-                <x-input wire:model="email" type="email" class="form-control" id="email" placeholder="Enter email"/>
-                <x-input wire:model="password" type="password" class="form-control" id="password"
+                <x-input wire:model="email" label="Email" type="email" class="form-control" id="email" placeholder="Enter email"/>
+                <x-input wire:model="password" label="Password" type="password" class="form-control" id="password"
                          placeholder="Password"/>
                 @if (session()->has('error'))
                     <x-alert icon="o-exclamation-triangle" class="alert-danger">

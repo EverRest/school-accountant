@@ -1,5 +1,5 @@
 <div>
-    <x-header title="Teachers" subtitle="Check this on mobile">
+    <x-header title="Users" subtitle="Check this on mobile">
         <x-slot:middle class="!justify-end">
             <x-input wire:model="search" icon="o-magnifying-glass" placeholder="Search..."/>
         </x-slot:middle>
@@ -30,7 +30,8 @@
         <div class="d-flex align-items-center">
             <x-dropdown>
                 <x-menu-item title="View" link="/users/{{ $user->id }}" icon="o-eye" spinner class="btn-sm"/>
-                <x-menu-item title="Edit" link="/users/{{ $user->id }}/update"  wire:click="edit({{ $user->id }})" icon="o-pencil" spinner class="btn-sm"/>
+                <x-menu-item title="Edit"  wire:click="edit({{ $user->id }})" icon="o-pencil"
+                             spinner class="btn-sm"/>
                 <x-menu-item title="Remove" wire:click="delete({{ $user->id }})" icon="o-trash" spinner class="btn-sm"/>
             </x-dropdown>
         </div>

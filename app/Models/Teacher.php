@@ -16,7 +16,7 @@ class Teacher extends Model
      */
     protected $fillable = [
         'user_id',
-        'individual_salary',
-        'group_salary',
+        'individual_lesson_salary',
+        'group_lesson_salary',
     ];
 }

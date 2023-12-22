@@ -29,6 +29,8 @@ use App\Livewire\UpdateCourse;
 use App\Livewire\UpdateGroup;
 use App\Livewire\UpdateLesson;
 use App\Livewire\UpdatePackage;
+use App\Livewire\UpdateStudent;
+use App\Livewire\UpdateTeacher;
 use App\Livewire\UpdateUser;
 use App\Livewire\User;
 use App\Livewire\Welcome;
@@ -59,15 +61,18 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::group(['prefix' => 'administrators'], function () {
         Route::get('/', Administrators::class)->name('administrators.list');
+        Route::get('/{user}/update', UpdateUser::class)->name('administrators.update');
         Route::get('/create', CreateAdministrator::class)->name('administrators.create');
     });
     Route::group(['prefix' => 'teachers'], function () {
         Route::get('/', Teachers::class)->name('teachers.list');
         Route::get('/create', CreateTeacher::class)->name('teachers.create');
+        Route::get('/{user}/update', UpdateTeacher::class)->name('teachers.update');
     });
     Route::group(['prefix' => 'students'], function () {
         Route::get('/', Students::class)->name('students.list');
         Route::get('/create', CreateStudent::class)->name('students.create');
+        Route::get('/{user}/update', UpdateStudent::class)->name('students.update');
     });
     Route::group(['prefix' => 'users'], function () {
         Route::delete('/{user}')->name('users.delete');

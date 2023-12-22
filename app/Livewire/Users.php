@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Livewire;
 
 use App\Models\User;
@@ -8,6 +9,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Throwable;
@@ -32,6 +34,16 @@ class Users extends Component
     public string $createUrl = '';
 
     /**
+     * @var string
+     */
+    protected string $role = '';
+
+    /**
+     * @var string
+     */
+    protected string $view = '';
+
+    /**
      * @var array
      */
     public array $headers = [
@@ -40,11 +52,6 @@ class Users extends Component
         ['key' => 'email', 'label' => 'Email'],
         ['key' => 'phone_number', 'label' => 'Phone Number'],
     ];
-
-    /**
-     * @var string
-     */
-    protected string $role = '';
 
     /**
      * @var UserService
@@ -87,6 +94,17 @@ class Users extends Component
     {
         $this->userService->destroy($user);
         $this->users = $this->getUsers();
+    }
+
+
+    /**
+     * @param int $user_id
+     *
+     * @return void
+     */
+    public function edit(int $user_id): void
+    {
+        $this->redirect(route(Str::plural($this->role) . ".update", ['user' => $user_id]));
     }
 
     /**
