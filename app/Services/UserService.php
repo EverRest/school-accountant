@@ -20,15 +20,4 @@ class UserService extends AbstractCRUDService
     {
         return $this->model::role($code)->get() ?? Collection::make();
     }
-
-    /**
-     * @param string $code
-     * @param int $perPage
-     *
-     * @return mixed
-     */
-    public function getUsersByRoleCodePaginated(string $code = '', int $perPage = 10): mixed
-    {
-        return $this->model::role($code)->get();
-    }
 }
