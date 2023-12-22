@@ -5,6 +5,10 @@ namespace App\Livewire;
 use App\Models\Lesson;
 use App\Services\GroupService;
 use App\Services\LessonService;
+use App\Services\UserService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Livewire\Component;
 
 class UpdateLesson extends Component
@@ -20,6 +24,11 @@ class UpdateLesson extends Component
     public mixed $groups;
 
     /**
+     * @var mixed
+     */
+    public mixed $users;
+
+    /**
      * @var ?string
      */
     public ?string $date = null;
@@ -33,6 +42,7 @@ class UpdateLesson extends Component
     {
         $this->lessonService = new LessonService();
         $this->groups = (new GroupService())->all()->get();
+        $this->users = (new UserService())->getUsersByRoleCode('teacher');
     }
 
     /**
@@ -57,7 +67,10 @@ class UpdateLesson extends Component
         session()->flash('message', 'Lesson successfully updated.');
     }
 
-    public function render()
+    /**
+     * @return View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+     */
+    public function render(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('livewire.update-lesson');
     }

@@ -5,7 +5,7 @@
         </x-slot:middle>
         <x-slot:actions>
             <x-button icon="o-funnel" class="btn-primary" wire:click="searchQ"/>
-            <x-button icon="o-plus" class="btn-primary" wire:click="create"/>
+            <x-button icon="o-plus" class="btn-primary" link="{{$createUrl}}"/>
         </x-slot:actions>
     </x-header>
 
