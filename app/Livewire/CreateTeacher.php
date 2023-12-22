@@ -12,5 +12,5 @@ class CreateTeacher extends CreateUser
     /**
      * @var string
      */
-    protected string $backRoute = 'teachers.lis';
+    protected string $backRoute = 'teachers.list';
 }
