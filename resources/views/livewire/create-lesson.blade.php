@@ -2,7 +2,7 @@
     <div class="card w-8/12 mx-12">
         <div class="card-body">
             <x-form wire:submit.prevent="submit">
-                <x-input wire:model="name" type="name" class="form-control" id="name" placeholder="Enter name"/>
+                <x-input wire:model="name" label="Name" type="name" class="form-control" id="name" placeholder="Enter name"/>
                 <x-select label="Select Group" icon="o-users" :options="$groups" wire:model="group_id" inline/>
                 <x-select label="Select Teacher" icon="o-user-circle" :options="$teachers" wire:model="teacher_id"
                           inline/>

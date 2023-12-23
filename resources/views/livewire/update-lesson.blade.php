@@ -2,10 +2,10 @@
     <div class="card w-8/12 mx-12">
         <div class="card-body">
             <x-form wire:submit.prevent="submit">
-                <x-input wire:model="name" type="name" class="form-control" id="name" placeholder="Enter name"/>
-                <x-select label="Select Group" icon="o-users" option-value="id" :options="$groups"
+                <x-input wire:model="name" label="Name" type="name" class="form-control" id="name" placeholder="Enter name"/>
+                <x-select label="Select Group" label="Group" icon="o-users" option-value="id" :options="$groups"
                           wire:model="selectedGroup" inline/>
-                <x-select label="Select Teacher" icon="o-user-circle" option-value="id" :options="$users"
+                <x-select label="Select Teacher" label="Teacher" icon="o-user-circle" option-value="id" :options="$users"
                           wire:model="selectedUser" inline/>
                 @if (session()->has('error'))
                     <x-alert icon="o-exclamation-triangle" class="alert-danger">

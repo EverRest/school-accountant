@@ -64,7 +64,7 @@ class UpdateLesson extends Component
         $this->validate(['date' => 'sometimes|date',]);
         $this->lessonService->update($this->lesson, ['date' => $this->date,]);
         session()->flash('message', 'Lesson successfully updated.');
-        $this->redirectRoute(route('lessons.list'));
+        $this->redirect(route('lessons.list'));
     }
 
     /**

@@ -52,12 +52,12 @@ Route::get('/', Welcome::class)->name('welcome');
 Route::get('/login', LoginForm::class)->name('login');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/log-out', LogOut::class)->name('log-out');
-    Route::group(['prefix' => 'courses'], function () {
-        Route::get('/{course}/update', UpdateCourse::class)->name('courses.update');
-        Route::get('/create', CreateCourse::class)->name('courses.create');
-        Route::get('/', Courses::class)->name('courses.list');
-        Route::get('/{course}', Course::class)->name('courses.show');
-        Route::delete('/{course}')->name('courses.delete');
+    Route::group(['prefix' => 'courses', 'as' => 'courses.',], function () {
+        Route::get('/', Courses::class)->name('list');
+        Route::get('/{course}/update', UpdateCourse::class)->name('update');
+        Route::get('/create', CreateCourse::class)->name('create');
+        Route::get('/{course}', Course::class)->name('show');
+        Route::delete('/{course}')->name('delete');
     });
     Route::group(['prefix' => 'administrators'], function () {
         Route::get('/', Administrators::class)->name('administrators.list');

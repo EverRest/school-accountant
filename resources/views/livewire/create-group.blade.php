@@ -2,7 +2,7 @@
     <div class="card w-8/12 mx-12">
         <div class="card-body">
             <x-form wire:submit.prevent="submit">
-                <x-input wire:model="name" type="name" class="form-control" id="name" placeholder="Enter name"/>
+                <x-input wire:model="name" label="Name" type="name" class="form-control" id="name" placeholder="Enter name"/>
                 <x-select label="Select Courses" icon="o-pencil" :options="$courses" wire:model="selectedCourse"
                           inline/>
                 @if (session()->has('error'))

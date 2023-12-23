@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Livewire;
 
 use App\Models\Package as Model;
@@ -27,14 +27,15 @@ class UpdatePackage extends Component
     }
 
     /**
+     * @param PackageService $packageService
      * @return void
      */
     public function submit(PackageService $packageService): void
     {
         $this->validate(['date' => 'sometimes|date',]);
         $packageService->update($this->package, ['name' => $this->date,]);
-        session()->flash('message', 'Lesson successfully updated.');
-        $this->redirect(route('lessons.list'));
+        session()->flash('message', 'Package successfully updated.');
+        $this->redirect(route('packages.list'));
     }
 
     /**
