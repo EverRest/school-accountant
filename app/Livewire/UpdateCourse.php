@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-
 namespace App\Livewire;
 
 use App\Models\Course;
@@ -51,7 +50,7 @@ class UpdateCourse extends Component
         $this->validate(['name' => 'sometimes|string|max:255',]);
         $this->courseService->update($this->course, ['name' => $this->name,]);
         session()->flash('message', 'Course successfully updated.');
-        $this->redirectRoute(route('courses.list'));
+        $this->redirect(route('courses.list'));
     }
 
     /**

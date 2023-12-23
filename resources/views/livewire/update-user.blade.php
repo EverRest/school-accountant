@@ -5,7 +5,6 @@
                 <x-input wire:model="name" label="Name" type="name" class="form-control" id="name" placeholder="Enter name"/>
                 <x-input wire:model="email" label="Email" type="email" class="form-control" id="email"
                          placeholder="Enter email"/>
-                <x-input wire:model="price" label="Price" type="price" class="form-control" id="price" placeholder="Enter price"/>
                 <x-input wire:model="phone_number" label="Phone Number"  type="text" class="form-control" id="phone_number"
                          placeholder="Enter Phone Number"/>
                 @if (session()->has('error'))
