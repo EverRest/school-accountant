@@ -6,7 +6,7 @@ use App\Traits\Models\CourseTrait;
 use App\Traits\Models\CreatorTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Group extends Model
 {
@@ -24,32 +24,18 @@ class Group extends Model
     ];
 
     /**
-     * @return HasManyThrough
+     * @return BelongsToMany
      */
-    public function teachers(): HasManyThrough
+    public function teachers(): BelongsToMany
     {
-        return $this->hasManyThrough(
-            Teacher::class,
-            GroupTeacher::class,
-            'group_id',
-            'id',
-            'id',
-            'teacher_id'
-        );
+        return $this->belongsToMany(Teacher::class, 'group_teacher');
     }
 
     /**
-     * @return HasManyThrough
+     * @return BelongsToMany
      */
-    public function students(): HasManyThrough
+    public function students(): BelongsToMany
     {
-        return $this->hasManyThrough(
-            Student::class,
-            GroupTeacher::class,
-            'group_id',
-            'id',
-            'id',
-            'student_id'
-        );
+        return $this->belongsToMany(Student::class, 'group_student');
     }
 }

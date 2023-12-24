@@ -89,25 +89,41 @@ class CreateGroup extends Component
     {
         $this->validate();
         /**
-         * @var Group $group
+         * @var \App\Models\Group $group
          */
         $group = $this->groupService->store([
             'name' => $this->name,
             'creator_id' => Auth::id(),
             'course_id' => $this->selectedCourse,
         ]);
-        $this->selectedStudents->each(
-            function ($id) use ($group) {
-                $user = $this->userService->findOrFail($id);
-                GroupStudent::create(['group_id' => $group->id, 'student_id' => $user->student->id]);
-            }
-        );
-        $this->selectedTeachers->each(
-            function ($id) use ($group) {
-                $user = $this->userService->findOrFail($id);
-                GroupTeacher::create(['group_id' => $group->id, 'teacher_id' => $user->teacher->id]);
-            }
-        );
+
+        if ($this->selectedStudents->isNotEmpty()) {
+            $selectedIdArray = $this->selectedStudents->toArray();
+            $group->students()
+                ->sync(
+                    $this->students
+                        ->filter(
+                            fn($student) => in_array($student->id, $selectedIdArray)
+                        )
+                        ->map(
+                            fn($student) => $student->student->id
+                        )
+                );
+        }
+
+        if ($this->selectedTeachers->isNotEmpty()) {
+            $selectedIdArray = $this->selectedTeachers->toArray();
+            $group->teachers()
+                ->sync(
+                    $this->teachers
+                        ->filter(
+                            fn($teacher) => in_array($teacher->id, $selectedIdArray)
+                        )
+                        ->map(
+                            fn($teacher) => $teacher->teacher->id
+                        )
+                );
+        }
         $this->reset();
         session()->flash('message', 'Group successfully created.');
         $this->redirect(route('groups.list'));

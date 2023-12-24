@@ -2,9 +2,26 @@
     <div class="card w-8/12 mx-12">
         <div class="card-body">
             <x-form wire:submit.prevent="submit">
-                <x-input wire:model="name" label="Name" type="name" class="form-control" id="name" placeholder="Enter name"/>
+                <x-input wire:model="name" label="Name" type="name" class="form-control" id="name"
+                         placeholder="Enter name"/>
                 <x-select label="Select Course" label="Course" icon="o-pencil" option-value="id" :options="$courses"
                           wire:model="selectedCourse" inline/>
+                <x-choices wire:model="selectedStudents"
+                           debounce="200ms"
+                           icon="o-users"
+                           hint="Add student to the course"
+                           label="Students"
+                           :options="$students"
+                           option-label="name"
+                />
+                <x-choices wire:model="selectedTeachers"
+                           debounce="200ms"
+                           icon="o-user-circle"
+                           hint="Add teacher to the course"
+                           label="Teachers"
+                           :options="$teachers"
+                           option-label="name"
+                />
                 @if (session()->has('error'))
                     <x-alert icon="o-exclamation-triangle" class="alert-danger">
                         {{ session('error') }}

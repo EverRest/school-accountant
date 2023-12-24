@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RolesSeeder::class);
         $this->call(SuperAdminSeeder::class);
-        $this->call(UsersSeeder::class);
-        $this->call(TeachersSeeder::class);
-        $this->call(CoursesSeeder::class);
-        $this->call(GroupsSeeder::class);
-        $this->call(LessonsSeeder::class);
+//        $this->call(UsersSeeder::class);
+//        $this->call(TeachersSeeder::class);
+//        $this->call(CoursesSeeder::class);
+//        $this->call(GroupsSeeder::class);
+//        $this->call(LessonsSeeder::class);
     }
 }
