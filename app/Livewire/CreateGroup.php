@@ -68,7 +68,7 @@ class CreateGroup extends Component
 
     public function __construct()
     {
-        $this->courses = (new CourseService())->all()->get();
+        $this->courses = (new CourseService())->all()->get()??Collection::make();
         $this->teachers = (new TeacherService())->all()->chunkMap(fn($teacher) => $teacher->user);
         $this->students = (new StudentService())->all()->chunkMap(fn($student) => $student->user);
         $this->groupService = new GroupService();
