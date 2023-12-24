@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Livewire;
 
 use App\Services\GroupService;
@@ -50,7 +51,7 @@ class CreateLesson extends Component
      * @var string[]
      */
     protected array $rules = [
-        'name' => 'required|unique:users,id',
+        'name' => 'required|string|min:3|max:255',
         'teacher_id' => 'required|exists:users,id',
         'group_id' => 'required|exists:groups,id',
         'date' => 'required|date',
@@ -83,15 +84,16 @@ class CreateLesson extends Component
     public function submit(): void
     {
         $this->validate();
-        $this->lessonService->store([
-            'name' => $this->name,
-            'creator_id' => Auth::id(),
-            'group_id' => $this->group_id,
-            'teacher_id' => $this->teacher_id,
-            'date' =>  $this->date
-        ]);
+        $this->lessonService
+            ->store([
+                'name' => $this->name,
+                'creator_id' => Auth::id(),
+                'group_id' => $this->group_id,
+                'teacher_id' => $this->teacher_id,
+                'date' => $this->date
+            ]);
         $this->reset();
         session()->flash('message', 'Lesson successfully created.');
-        $this->redirectRoute(route('lessons.list'));
+        $this->redirect(route('lessons.list'));
     }
 }

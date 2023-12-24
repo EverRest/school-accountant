@@ -14,6 +14,10 @@
         <strong>{{ $lesson->id }}</strong>
         @endscope
 
+        @scope('cell_name', $lesson)
+        <strong>{{ $lesson->name }}</strong>
+        @endscope
+
         @scope('cell_course', $lesson)
         <x-badge :value="$lesson?->group?->course?->name"/>
         @endscope

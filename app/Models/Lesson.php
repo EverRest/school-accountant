@@ -18,10 +18,10 @@ class Lesson extends Model
      * @var string[]
      */
     protected $fillable = [
+        'name',
         'creator_id',
         'group_id',
         'teacher_id',
-        'teacher_salary',
         'date',
     ];
 

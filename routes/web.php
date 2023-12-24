@@ -11,6 +11,7 @@ use App\Livewire\CreateLesson;
 use App\Livewire\CreatePackage;
 use App\Livewire\CreateStudent;
 use App\Livewire\CreateTeacher;
+use App\Livewire\Dashboard;
 use App\Livewire\Group;
 use App\Livewire\Groups;
 use App\Livewire\Lesson;
@@ -33,7 +34,6 @@ use App\Livewire\UpdateStudent;
 use App\Livewire\UpdateTeacher;
 use App\Livewire\UpdateUser;
 use App\Livewire\User;
-use App\Livewire\Welcome;
 use App\Livewire\Package;
 use Illuminate\Support\Facades\Route;
 
@@ -48,7 +48,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Welcome::class)->name('welcome');
+Route::get('/', Dashboard::class)->name('welcome');
 Route::get('/login', LoginForm::class)->name('login');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/log-out', LogOut::class)->name('log-out');

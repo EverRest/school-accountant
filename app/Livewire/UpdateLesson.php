@@ -14,6 +14,11 @@ use Livewire\Component;
 class UpdateLesson extends Component
 {
     /**
+     * @var string
+     */
+    public string $name = '';
+
+    /**
      * @var ?Lesson
      */
     public ?Lesson $lesson = null;
@@ -52,6 +57,7 @@ class UpdateLesson extends Component
      */
     public function mount(Lesson $lesson): void
     {
+        $this->name = $lesson->name;
         $this->date = $lesson->date;
         $this->lesson = $lesson;
     }
@@ -61,8 +67,8 @@ class UpdateLesson extends Component
      */
     public function submit(): void
     {
-        $this->validate(['date' => 'sometimes|date',]);
-        $this->lessonService->update($this->lesson, ['date' => $this->date,]);
+        $this->validate(['date' => 'sometimes|date','name' => '']);
+        $this->lessonService->update($this->lesson, ['date' => $this->date,'name' => $this->name]);
         session()->flash('message', 'Lesson successfully updated.');
         $this->redirect(route('lessons.list'));
     }

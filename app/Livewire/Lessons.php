@@ -11,6 +11,7 @@ use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Throwable;
+use App\Models\Lesson as Model;
 
 class Lessons extends Component
 {
@@ -36,6 +37,7 @@ class Lessons extends Component
      */
     public array $headers = [
         ['key' => 'id', 'label' => '#'],
+        ['key' => 'name', 'label' => 'Theme'],
         ['key' => 'date', 'label' => 'Date'],
         ['key' => 'course', 'label' => 'Course'],
         ['key' => 'group', 'label' => 'Group'],
@@ -75,15 +77,15 @@ class Lessons extends Component
     }
 
     /**
-     * @param Group $group
+     * @param Model $lesson
      *
      * @return void
      * @throws Throwable
      */
-    public function delete(Group $group): void
+    public function delete(Model $lesson): void
     {
-        $this->lessonService->destroy($group);
-        $this->groups = $this->getLessons();
+        $this->lessonService->destroy($lesson);
+        $this->lessons = $this->getLessons();
     }
 
     /**
