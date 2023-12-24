@@ -66,11 +66,6 @@ class CreateGroup extends Component
      */
     private GroupService $groupService;
 
-    /**
-     * @var UserService
-     */
-    private UserService $userService;
-
     public function __construct()
     {
         $this->courses = (new CourseService())->all()->get();
@@ -79,7 +74,6 @@ class CreateGroup extends Component
         $this->groupService = new GroupService();
         $this->selectedStudents = Collection::make();
         $this->selectedTeachers = Collection::make();
-        $this->userService = new UserService();
     }
 
     /**

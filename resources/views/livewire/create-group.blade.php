@@ -4,10 +4,10 @@
             <x-form wire:submit.prevent="submit">
                 <x-input wire:model="name" label="Name" type="name" class="form-control" id="name"
                          placeholder="Enter name"/>
-{{--                <x-select label="Select Courses" icon="o-pencil" :options="$courses" wire:model="selectedCourse"--}}
-{{--                          inline/>--}}
-{{--                <x-choices wire:model="selectedStudents" icon="o-users" hint="Add student to the course" label="Students" :options="$students" />--}}
-{{--                <x-choices wire:model="selectedTeachers" icon="o-user-circle" hint="Add teacher to the course" label="Teachers" :options="$teachers" />--}}
+                <x-select wire:model="selectedCourse" label="Select Courses" icon="o-pencil" :options="$courses"
+                          inline/>
+                <x-choices wire:model="selectedStudents" icon="o-users" hint="Add student to the course" label="Students" :options="$students" />
+                <x-choices wire:model="selectedTeachers" icon="o-user-circle" hint="Add teacher to the course" label="Teachers" :options="$teachers" />
                 @if (session()->has('error'))
                     <x-alert icon="o-exclamation-triangle" class="alert-danger">
                         {{ session('error') }}
