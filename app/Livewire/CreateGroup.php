@@ -94,9 +94,8 @@ class CreateGroup extends Component
         $group = $this->groupService->store([
             'name' => $this->name,
             'creator_id' => Auth::id(),
-            'course_id' => $this->selectedCourse,
+            'course_id' => (int)$this->selectedCourse,
         ]);
-
         if ($this->selectedStudents->isNotEmpty()) {
             $selectedIdArray = $this->selectedStudents->toArray();
             $group->students()
@@ -110,7 +109,6 @@ class CreateGroup extends Component
                         )
                 );
         }
-
         if ($this->selectedTeachers->isNotEmpty()) {
             $selectedIdArray = $this->selectedTeachers->toArray();
             $group->teachers()

@@ -6,13 +6,13 @@
                          placeholder="Enter name"/>
                 <x-select label="Select Course" label="Course" icon="o-pencil" option-value="id" :options="$courses"
                           wire:model="selectedCourse" inline/>
+{{--                @php dd($selectedStudents) @endphp--}}
                 <x-choices wire:model="selectedStudents"
                            debounce="200ms"
                            icon="o-users"
                            hint="Add student to the course"
                            label="Students"
                            :options="$students"
-                           option-label="name"
                 />
                 <x-choices wire:model="selectedTeachers"
                            debounce="200ms"
@@ -20,7 +20,6 @@
                            hint="Add teacher to the course"
                            label="Teachers"
                            :options="$teachers"
-                           option-label="name"
                 />
                 @if (session()->has('error'))
                     <x-alert icon="o-exclamation-triangle" class="alert-danger">

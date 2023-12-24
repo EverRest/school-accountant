@@ -1,8 +1,11 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Livewire;
 
 use App\Models\Group;
+use App\Models\Student;
+use App\Models\Teacher;
 use App\Services\CourseService;
 use App\Services\GroupService;
 use App\Services\StudentService;
@@ -13,6 +16,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\NoReturn;
 use Livewire\Component;
+use stdClass;
 
 class UpdateGroup extends Component
 {
@@ -44,31 +48,45 @@ class UpdateGroup extends Component
     /**
      * @var mixed
      */
-    public mixed $selectedTeachers;
+    public mixed $selectedTeachers = null;
 
     /**
      * @var mixed
      */
-    public mixed $selectedStudents;
+    public mixed $selectedStudents = null;
 
     /**
-     * @var Group
+     * @var ?Group
      *
      */
-    private Group $group;
+    public ?Group $group = null;
 
     /**
      * @var GroupService|null
      */
     private ?GroupService $groupService;
 
+    /**
+     * @var TeacherService|null
+     */
+    private ?TeacherService $teacherService;
+
+    /**
+     * @var StudentService|null
+     */
+    private ?StudentService $studentService;
+
     public function __construct()
     {
         $this->groupService = new GroupService();
         $courses = (new CourseService())->all()->get();
         $this->courses = $courses;
-        $this->students = (new StudentService())->all()->get();
-        $this->teachers = (new TeacherService())->all()->get();
+        $this->teacherService = new TeacherService();
+        $this->studentService = new StudentService();
+        $this->teachers = $this->teacherService->all()
+            ->chunkMap(fn($teacher) => $teacher->user);
+        $this->students = $this->studentService->all()
+            ->chunkMap(fn($student) => $student->user);
     }
 
     /**
@@ -80,12 +98,11 @@ class UpdateGroup extends Component
     {
         $this->group = $group;
         $this->name = $group->name;
-        $students = $group->students??Collection::make();
-        $teachers = $group->teachers??Collection::make();
-        $this->selectedStudents = $students->map(fn($s) => $s->user);
-        $this->selectedTeachers = $teachers->map(fn($s) => $s->user);
         $this->selectedCourse = $group->course;
-//        dd($this->selectedStudents, $this->selectedTeachers);
+        $selectedStudents = $group->students ?? Collection::make();
+        $selectedTeachers = $group->teachers ?? Collection::make();
+        $this->selectedStudents = $selectedStudents->map(fn(Student $s) => $s->user->id);
+        $this->selectedTeachers = $selectedTeachers->map(fn(Teacher $t) => $t->user->id);
     }
 
     /**
@@ -94,7 +111,28 @@ class UpdateGroup extends Component
     public function submit(): void
     {
         $this->validate(['name' => 'sometimes|string|max:255',]);
-        $this->groupService->update($this->group, ['name' => $this->name,'course_id' => $this->selectedCourse]);
+        $group = $this->groupService->update($this->group, ['name' => $this->name, 'course_id' => $this->selectedCourse?->id,]);
+        $group->students()
+            ->sync(
+                $this->students
+                    ->filter(
+                        fn($student) => in_array($student->id, $this->selectedStudents->toArray())
+                    )
+                    ->map(
+                        fn($student) => $student->student->id
+                    )
+            );
+        $group->teachers()
+            ->sync(
+                $this->teachers
+                    ->filter(
+                        fn($teacher) => in_array($teacher->id, $this->selectedTeachers->toArray())
+                    )
+                    ->map(
+                        fn($teacher) => $teacher->teacher->id
+                    )
+            );
+
         session()->flash('message', 'Group successfully updated.');
         $this->redirect(route('groups.list'));
     }
