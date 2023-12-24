@@ -98,7 +98,7 @@ class UpdateGroup extends Component
     {
         $this->group = $group;
         $this->name = $group->name;
-        $this->selectedCourse = $group->course;
+        $this->selectedCourse = $group->course->id;
         $selectedStudents = $group->students ?? Collection::make();
         $selectedTeachers = $group->teachers ?? Collection::make();
         $this->selectedStudents = $selectedStudents->map(fn(Student $s) => $s->user->id);
@@ -111,7 +111,11 @@ class UpdateGroup extends Component
     public function submit(): void
     {
         $this->validate(['name' => 'sometimes|string|max:255',]);
-        $group = $this->groupService->update($this->group, ['name' => $this->name, 'course_id' => $this->selectedCourse?->id,]);
+        $group = $this->groupService
+            ->update(
+                $this->group,
+                ['name' => $this->name, 'course_id' => $this->selectedCourse,]
+            );
         $group->students()
             ->sync(
                 $this->students

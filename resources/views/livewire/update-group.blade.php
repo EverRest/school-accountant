@@ -6,7 +6,6 @@
                          placeholder="Enter name"/>
                 <x-select label="Select Course" label="Course" icon="o-pencil" option-value="id" :options="$courses"
                           wire:model="selectedCourse" inline/>
-{{--                @php dd($selectedStudents) @endphp--}}
                 <x-choices wire:model="selectedStudents"
                            debounce="200ms"
                            icon="o-users"
