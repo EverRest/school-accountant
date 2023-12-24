@@ -4,16 +4,16 @@
         <x-form wire:submit.prevent="submit">
             <x-input wire:model="name" label="Name" type="name" class="form-control" id="name"
                      placeholder="Enter name"/>
-            @if(!$students->empty())
-                <x-select wire:model="selectedCourse" label="Select Courses" icon="o-pencil" :options="$courses"
-                          inline/>
+            @if($courses->isNotEmpty())
+                <x-choices wire:model="selectedCourse" icon="o-pencil" hint="Select Course"
+                           label="Courses" :options="$courses" single/>
             @else
                 <div class="text-center">
                     <x-button label="Add course" icon="o-pencil" class="btn-active btn-sm w-1/3"
                               link="{{route('courses.create')}}"/>
                 </div>
             @endif
-            @if(!$students->empty())
+            @if($students->isNotEmpty())
                 <x-choices wire:model="selectedStudents" icon="o-users" hint="Add student to the course"
                            label="Students" :options="$students"/>
             @else
@@ -22,7 +22,7 @@
                               link="{{route('students.create')}}"/>
                 </div>
             @endif
-            @if(!$teachers->empty())
+            @if($teachers->isNotEmpty())
                 <x-choices wire:model="selectedTeachers" icon="o-user-circle" hint="Add teacher to the course"
                            label="Teachers" :options="$teachers"/>
             @else

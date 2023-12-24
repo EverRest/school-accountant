@@ -9,7 +9,6 @@ use App\Services\CourseService;
 use App\Services\GroupService;
 use App\Services\StudentService;
 use App\Services\TeacherService;
-use App\Services\UserService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -23,6 +22,16 @@ class CreateGroup extends Component
      * @var string
      */
     public string $name = '';
+
+    /**
+     * @var int
+     */
+    public int $creatorId;
+
+    /**
+     * @var int
+     */
+    public int $courseId;
 
     /**
      * @var mixed
@@ -58,7 +67,9 @@ class CreateGroup extends Component
      * @var string[]
      */
     public array $rules = [
-        'name' => 'required|unique:courses,name',
+        'name' => 'required|unique:courses,name|min:3|max:255',
+        'creatorId' => 'required',
+        'courseId' => 'required',
     ];
 
     /**
@@ -71,9 +82,9 @@ class CreateGroup extends Component
      */
     public function __construct()
     {
-        $this->courses = (new CourseService())->all()->get()??Collection::make();
-        $this->teachers = (new TeacherService())->all()->chunkMap(fn($teacher) => $teacher->user)?? Collection::make();
-        $this->students = (new StudentService())->all()->chunkMap(fn($student) => $student->user)?? Collection::make();
+        $this->courses = (new CourseService())->all()->get() ?? Collection::make();
+        $this->teachers = (new TeacherService())->all()->chunkMap(fn($teacher) => $teacher->user) ?? Collection::make();
+        $this->students = (new StudentService())->all()->chunkMap(fn($student) => $student->user) ?? Collection::make();
         $this->groupService = new GroupService();
         $this->selectedStudents = Collection::make();
         $this->selectedTeachers = Collection::make();
@@ -84,14 +95,16 @@ class CreateGroup extends Component
      */
     public function submit(): void
     {
+        $this->creatorId = intval(Auth::id());
+        $this->courseId = intval($this->selectedCourse);
         $this->validate();
         /**
          * @var \App\Models\Group $group
          */
         $group = $this->groupService->store([
             'name' => $this->name,
-            'creator_id' => Auth::id(),
-            'course_id' => (int)$this->selectedCourse,
+            'creator_id' => $this->creatorId,
+            'course_id' => $this->courseId,
         ]);
         if ($this->selectedStudents->isNotEmpty()) {
             $selectedIdArray = $this->selectedStudents->toArray();
