@@ -72,8 +72,8 @@ class CreateGroup extends Component
     public function mount(): void
     {
         $this->courses = (new CourseService())->all()->get()??Collection::make();
-        $this->teachers = (new TeacherService())->all()->chunkMap(fn($teacher) => $teacher->user);
-        $this->students = (new StudentService())->all()->chunkMap(fn($student) => $student->user);
+        $this->teachers = (new TeacherService())->all()->chunkMap(fn($teacher) => $teacher->user)?? Collection::make();
+        $this->students = (new StudentService())->all()->chunkMap(fn($student) => $student->user)?? Collection::make();
         $this->groupService = new GroupService();
         $this->selectedStudents = Collection::make();
         $this->selectedTeachers = Collection::make();
