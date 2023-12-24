@@ -57,7 +57,7 @@ class UpdateLesson extends Component
      */
     public function mount(Lesson $lesson): void
     {
-        $this->name = $lesson->name;
+        $this->name = $lesson->name ?? '';
         $this->date = $lesson->date;
         $this->lesson = $lesson;
     }
