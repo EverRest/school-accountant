@@ -47,7 +47,7 @@ class CreateGroup extends Component
     /**
      * @var mixed
      */
-    public mixed $selectedTeachers;
+    public mixed $selectedTeachers = [];
 
     /**
      * @var mixed
@@ -66,7 +66,10 @@ class CreateGroup extends Component
      */
     private GroupService $groupService;
 
-    public function __construct()
+    /**
+     * @return void
+     */
+    public function mount(): void
     {
         $this->courses = (new CourseService())->all()->get()??Collection::make();
         $this->teachers = (new TeacherService())->all()->chunkMap(fn($teacher) => $teacher->user);
