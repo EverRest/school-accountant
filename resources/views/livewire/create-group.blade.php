@@ -6,10 +6,14 @@
                          placeholder="Enter name"/>
                 <x-select wire:model="selectedCourse" label="Select Courses" icon="o-pencil" :options="$courses"
                           inline/>
-                <x-choices wire:model="selectedStudents" icon="o-users" hint="Add student to the course"
-                           label="Students" :options="$students"/>
-                <x-choices wire:model="selectedTeachers" icon="o-user-circle" hint="Add teacher to the course"
-                           label="Teachers" :options="$teachers"/>
+                @if($students)
+                    <x-choices wire:model="selectedStudents" icon="o-users" hint="Add student to the course"
+                               label="Students" :options="$students"/>
+                @endif
+                @if($teachers)
+                    <x-choices wire:model="selectedTeachers" icon="o-user-circle" hint="Add teacher to the course"
+                               label="Teachers" :options="$teachers"/>
+                @endif
                 @if (session()->has('error'))
                     <x-alert icon="o-exclamation-triangle" class="alert-danger">
                         {{ session('error') }}
