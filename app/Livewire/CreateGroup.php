@@ -69,7 +69,7 @@ class CreateGroup extends Component
     /**
      * @return void
      */
-    public function mount(): void
+    public function __construct()
     {
         $this->courses = (new CourseService())->all()->get()??Collection::make();
         $this->teachers = (new TeacherService())->all()->chunkMap(fn($teacher) => $teacher->user)?? Collection::make();
