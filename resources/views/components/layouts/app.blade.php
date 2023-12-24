@@ -37,10 +37,10 @@
                     <x-menu-item title="Outcome" icon="o-arrow-up-tray" link="/outcome"/>
                     <x-menu-item title="Reports" icon="o-chart-bar-square" link="/reports"/>
                 </x-menu-sub>
+                <x-menu-item title="Schedule" icon="o-home" link="/"/>
             @else
                 <x-menu-item title="Login" icon="o-user-plus" link="/login"/>
             @endif
-            <x-menu-item title="Home" icon="o-home" link="/"/>
         </x-menu>
     </x-slot:sidebar>
 
