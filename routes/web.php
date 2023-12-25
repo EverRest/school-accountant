@@ -86,7 +86,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/{lesson}/update', UpdateLesson::class)->name('lessons.update');
         Route::get('/{lesson}', Lesson::class)->name('lessons.show');
         Route::get('/', Lessons::class)->name('lessons.list');
-//        Route::delete('/{lesson}')->name('lessons.delete');
+        Route::delete('/{lesson}')->name('lessons.delete');
     });
     Route::group(['prefix' => 'groups'], function () {
         Route::get('/create', CreateGroup::class)->name('groups.create');

@@ -2,7 +2,6 @@
 declare(strict_types=1);
 namespace App\Livewire;
 
-use App\Models\Group;
 use App\Services\LessonService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
