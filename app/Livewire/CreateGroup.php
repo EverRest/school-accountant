@@ -56,7 +56,7 @@ class CreateGroup extends Component
     /**
      * @var mixed
      */
-    public mixed $selectedTeacher = null;
+    public mixed $selectedTeacher = '';
 
     /**
      * @var mixed

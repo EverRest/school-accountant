@@ -21,12 +21,4 @@ class Teacher extends Model
         'individual_lesson_salary',
         'group_lesson_salary',
     ];
-
-    /**
-     * @return Attribute
-     */
-    public function name(): Attribute
-    {
-        return Attribute::make(get: fn ($value, $attributes) => $this->user->name??'');
-    }
 }
