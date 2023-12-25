@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\Lesson as Model;
+use App\Models\LessonTeacherSalary as Model;
 use Livewire\Component;
 
 class Lesson extends Component

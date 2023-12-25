@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace App\Livewire;
 
-use App\Models\Lesson;
+use App\Models\LessonTeacherSalary;
 use App\Services\GroupService;
 use App\Services\LessonService;
 use App\Services\UserService;
@@ -19,9 +19,9 @@ class UpdateLesson extends Component
     public string $name = '';
 
     /**
-     * @var ?Lesson
+     * @var ?LessonTeacherSalary
      */
-    public ?Lesson $lesson = null;
+    public ?LessonTeacherSalary $lesson = null;
 
     /**
      * @var mixed
@@ -51,11 +51,11 @@ class UpdateLesson extends Component
     }
 
     /**
-     * @param Lesson $lesson
+     * @param LessonTeacherSalary $lesson
      *
      * @return void
      */
-    public function mount(Lesson $lesson): void
+    public function mount(LessonTeacherSalary $lesson): void
     {
         $this->name = $lesson->name ?? '';
         $this->date = $lesson->date;

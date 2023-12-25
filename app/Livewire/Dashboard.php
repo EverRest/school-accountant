@@ -21,9 +21,7 @@ class Dashboard extends Component
      */
     public function mount(): void
     {
-        $this->lessons = (new LessonService())->query()
-            ->whereBetween('date', [Carbon::today(), Carbon::tomorrow()])
-            ->get();
+        $this->lessons = (new LessonService())->getTodayLessons();
     }
 
     /**

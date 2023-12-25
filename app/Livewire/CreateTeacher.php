@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Livewire;
 
 use App\Models\User;
@@ -64,12 +65,13 @@ class CreateTeacher extends CreateUser
         /**
          * @var User $user
          */
-        $user = $this->userService->store([
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => Hash::make($this->password),
-            'phone_number' => $this->phone_number
-        ]);
+        $user = $this->userService
+            ->store([
+                'name' => $this->name,
+                'email' => $this->email,
+                'password' => Hash::make($this->password),
+                'phone_number' => $this->phone_number
+            ]);
         $user->assignRole($this->role);
         $user->teacher()->create([
             'individual_lesson_salary' => $this->individual_lesson_salary,

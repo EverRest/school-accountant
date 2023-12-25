@@ -12,6 +12,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Models\User as User;
 
 class CreateLesson extends Component
 {
@@ -89,7 +90,7 @@ class CreateLesson extends Component
                 'name' => $this->name,
                 'creator_id' => Auth::id(),
                 'group_id' => $this->group_id,
-                'teacher_id' => $this->teacher_id,
+                'teacher_id' => $this->teachers->first(fn(User $user) => $user->id)?->teacher?->id,
                 'date' => $this->date
             ]);
         $this->reset();

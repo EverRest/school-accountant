@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Lesson;
+use App\Models\LessonTeacherSalary;
 use Exception;
 use Illuminate\Database\Seeder;
 
@@ -15,6 +15,6 @@ class LessonsSeeder extends Seeder
      */
     public function run(): void
     {
-        Lesson::factory(20)->create();
+        LessonTeacherSalary::factory(20)->create();
     }
 }

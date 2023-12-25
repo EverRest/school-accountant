@@ -5,13 +5,13 @@ namespace Database\Factories;
 
 use App\Models\Course;
 use App\Models\Group;
-use App\Models\Lesson;
+use App\Models\LessonTeacherSalary;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Lesson>
+ * @extends Factory<LessonTeacherSalary>
  */
 class LessonFactory extends Factory
 {
