@@ -41,7 +41,7 @@ class CreateGroup extends Component
     /**
      * @var mixed
      */
-    public mixed $selectedCourse = '';
+    public mixed $selectedCourse;
 
     /**
      * @var mixed
@@ -56,7 +56,7 @@ class CreateGroup extends Component
     /**
      * @var mixed
      */
-    public mixed $selectedTeachers = [];
+    public mixed $selectedTeacher = null;
 
     /**
      * @var mixed
@@ -82,12 +82,12 @@ class CreateGroup extends Component
      */
     public function __construct()
     {
-        $this->courses = (new CourseService())->all()->get() ?? Collection::make();
+        $this->courses = (new CourseService())->all()->get();
         $this->teachers = (new TeacherService())->all()->chunkMap(fn($teacher) => $teacher->user) ?? Collection::make();
         $this->students = (new StudentService())->all()->chunkMap(fn($student) => $student->user) ?? Collection::make();
         $this->groupService = new GroupService();
         $this->selectedStudents = Collection::make();
-        $this->selectedTeachers = Collection::make();
+        $this->selectedCourse = null;
     }
 
     /**
@@ -119,18 +119,13 @@ class CreateGroup extends Component
                         )
                 );
         }
-        if ($this->selectedTeachers->isNotEmpty()) {
-            $selectedIdArray = $this->selectedTeachers->toArray();
+        if ($this->selectedTeacher) {
             $group->teachers()
                 ->sync(
-                    $this->teachers
-                        ->filter(
-                            fn($teacher) => in_array($teacher->id, $selectedIdArray)
-                        )
-                        ->map(
-                            fn($teacher) => $teacher->teacher->id
-                        )
-                );
+                    [$this->teachers
+                        ->first(fn($teacher) => $teacher->id === $this->selectedTeacher)
+                        ->teacher->id,
+                    ]);
         }
         $this->reset();
         session()->flash('message', 'Group successfully created.');
