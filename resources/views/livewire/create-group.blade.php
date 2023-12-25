@@ -11,8 +11,8 @@
                 wire:model="selectedCourse"
                 single/>
             @if($students->isNotEmpty())
-                <x-choices wire:model="selectedStudents" icon="o-users" hint="Add student to the course"
-                           label="Students" :options="$students"/>
+{{--                <x-choices wire:model="selectedStudents" icon="o-users" hint="Add student to the course"--}}
+{{--                           label="Students" :options="$students"/>--}}
             @else
                 <div class="text-center">
                     <x-button label="Add student" icon="o-users" class="btn-accent btn-sm w-1/3"
