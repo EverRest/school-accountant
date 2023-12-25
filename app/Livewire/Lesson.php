@@ -1,8 +1,8 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Livewire;
 
-use App\Models\LessonTeacherSalary as Model;
+use App\Models\Lesson as Model;
 use Livewire\Component;
 
 class Lesson extends Component

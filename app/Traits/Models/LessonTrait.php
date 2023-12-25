@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace App\Traits\Models;
 
-use App\Models\LessonTeacherSalary;
+use App\Models\Lesson;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait LessonTrait
@@ -12,6 +12,6 @@ trait LessonTrait
      */
     public function lesson(): BelongsTo
     {
-        return $this->belongsTo(LessonTeacherSalary::class);
+        return $this->belongsTo(Lesson::class);
     }
 }

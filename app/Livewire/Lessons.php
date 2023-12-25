@@ -10,7 +10,7 @@ use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Throwable;
-use App\Models\LessonTeacherSalary as Model;
+use App\Models\Lesson as Model;
 
 class Lessons extends Component
 {
