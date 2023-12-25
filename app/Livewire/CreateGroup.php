@@ -54,9 +54,14 @@ class CreateGroup extends Component
     public mixed $students;
 
     /**
+     * @var int
+     */
+    public int $selectedTeacherId;
+
+    /**
      * @var mixed
      */
-    public mixed $selectedTeacher = '';
+    public mixed $teacherId = null;
 
     /**
      * @var mixed
@@ -68,8 +73,9 @@ class CreateGroup extends Component
      */
     public array $rules = [
         'name' => 'required|unique:courses,name|min:3|max:255',
-        'creatorId' => 'required',
-        'courseId' => 'required',
+        'creatorId' => 'required|exists:users,id',
+        'courseId' => 'required|exists:courses,id',
+        'selectedTeacherId' => 'required|exists:teachers,user_id',
     ];
 
     /**
@@ -106,27 +112,23 @@ class CreateGroup extends Component
             'creator_id' => $this->creatorId,
             'course_id' => $this->courseId,
         ]);
-        if ($this->selectedStudents->isNotEmpty()) {
-            $selectedIdArray = $this->selectedStudents->toArray();
-            $group->students()
-                ->sync(
-                    $this->students
-                        ->filter(
-                            fn($student) => in_array($student->id, $selectedIdArray)
-                        )
-                        ->map(
-                            fn($student) => $student->student->id
-                        )
-                );
-        }
-        if ($this->selectedTeacher) {
-            $group->teachers()
-                ->sync(
-                    [$this->teachers
-                        ->first(fn($teacher) => $teacher->id === $this->selectedTeacher)
-                        ->teacher->id,
-                    ]);
-        }
+        $selectedIdArray = $this->selectedStudents->toArray();
+        $group->students()
+            ->sync(
+                $this->students
+                    ->filter(
+                        fn($student) => in_array($student->id, $selectedIdArray)
+                    )
+                    ->map(
+                        fn($student) => $student->student->id
+                    )
+            );
+        $group->teachers()
+            ->sync(
+                [$this->teachers
+                    ->first(fn($teacher) => $teacher->id === $this->selectedTeacherId)
+                    ->teacher->id,
+                ]);
         $this->reset();
         session()->flash('message', 'Group successfully created.');
         $this->redirect(route('groups.list'));
