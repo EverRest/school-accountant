@@ -7,6 +7,8 @@ use App\Traits\Models\TeacherTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Lesson extends Model
 {
@@ -31,5 +33,13 @@ class Lesson extends Model
     public function group(): BelongsTo
     {
         return $this->belongsTo(Group::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function studentAttendances(): HasMany
+    {
+        return $this->hasMany(StudentAttendance::class);
     }
 }

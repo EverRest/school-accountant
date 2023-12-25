@@ -12,6 +12,20 @@
                 <x-input wire:model="phone_number" label="Phone Number" type="text" class="form-control"
                          id="phone_number"
                          placeholder="Enter Phone Number"/>
+                @if($packages->isNotEmpty())
+                    <x-choices wire:model="package_id"
+                               icon="o-users"
+                               hint="Buy package"
+                               label="Packages"
+                               :options="$packages"
+                               single
+                    />
+                @else
+                    <div class="text-center">
+                        <x-button label="Add package" icon="o-money" class="btn-accent btn-sm w-1/3"
+                                  link="{{route('packages.create')}}"/>
+                    </div>
+                @endif
                 @if (session()->has('error'))
                     <x-alert icon="o-exclamation-triangle" class="alert-danger">
                         {{ session('error') }}

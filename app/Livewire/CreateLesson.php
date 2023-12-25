@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace App\Livewire;
 
+use App\Models\StudentPackage;
 use App\Services\GroupService;
 use App\Services\LessonService;
+use App\Services\StudentAttendeeService;
 use App\Services\UserService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -63,8 +65,14 @@ class CreateLesson extends Component
      */
     private LessonService $lessonService;
 
+    /**
+     * @var StudentAttendeeService
+     */
+    private StudentAttendeeService $studentAttendeeService;
+
     public function __construct()
     {
+        $this->studentAttendeeService = new StudentAttendeeService();
         $this->lessonService = new LessonService();
         $this->teachers = (new UserService())->getUsersByRoleCode(self::TEACHER_ROLE);
         $this->groups = (new GroupService())->all()->get();
@@ -85,7 +93,7 @@ class CreateLesson extends Component
     public function submit(): void
     {
         $this->validate();
-        $this->lessonService
+        $lesson = $this->lessonService
             ->store([
                 'name' => $this->name,
                 'creator_id' => Auth::id(),
@@ -93,6 +101,18 @@ class CreateLesson extends Component
                 'teacher_id' => $this->teachers->first(fn(User $user) => $user->id)?->teacher?->id,
                 'date' => $this->date
             ]);
+        $students = $lesson->group->students;
+        if ($students && $students->isNotEmpty()) {
+            foreach ($students as $student) {
+                $this->studentAttendeeService->store([
+                    'lesson_id' => $lesson->id,
+                    'student_id' => $student->id,
+                    // TODO: implement check for student packages
+                    'student_package_id' => StudentPackage::first()->id,
+                    'is_present' => 1
+                ]);
+            }
+        }
         $this->reset();
         session()->flash('message', 'Lesson successfully created.');
         $this->redirect(route('lessons.list'));

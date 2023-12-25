@@ -53,6 +53,6 @@ class LessonService extends AbstractCRUDService
 
     protected function with($query): EloquentBuilder
     {
-        return $query->with(['group.course', 'creator', 'group.teachers', 'group.students']);
+        return $query->with(['group.course', 'creator', 'group.teachers', 'group.students', 'studentAttendances.student',]);
     }
 }

@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace App\Traits\Models;
 
-use App\Models\StudentPackage;
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait StudentTrait
@@ -12,6 +12,6 @@ trait StudentTrait
      */
     public function student(): BelongsTo
     {
-        return $this->belongsTo(StudentPackage::class);
+        return $this->belongsTo(Student::class);
     }
 }

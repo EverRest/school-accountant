@@ -27,4 +27,12 @@ class Student extends Model
     {
         return $this->belongsTo(StudentAttendance::class);
     }
+
+    /**
+     * @return BelongsTo
+     */
+    public function studentPackages(): BelongsTo
+    {
+        return $this->belongsTo(StudentPackage::class);
+    }
 }

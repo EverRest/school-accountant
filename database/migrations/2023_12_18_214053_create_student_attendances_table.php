@@ -23,7 +23,7 @@ return new class extends Migration
                 ->constrained('student_packages')
                 ->cascadeOnDelete();
             $table->decimal('fee')->default(0);
-            $table->boolean('is_present');
+            $table->boolean('is_present')->default(0);
             $table->timestamps();
         });
     }

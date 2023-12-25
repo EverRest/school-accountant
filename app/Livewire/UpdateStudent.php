@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Livewire;
 
+use App\Services\PackageService;
 use App\Services\UserService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -13,6 +14,16 @@ use App\Models\User;
 
 class UpdateStudent extends Component
 {
+    /**
+     * @var mixed
+     */
+    public mixed $packages;
+
+    /**
+     * @var mixed
+     */
+    public mixed $package_id;
+
     /**
      * @var ?User
      */
@@ -48,9 +59,16 @@ class UpdateStudent extends Component
      */
     private ?UserService $userService;
 
+    /**
+     * @var PackageService|null
+     */
+    private ?PackageService $packageService;
+
     public function __construct()
     {
         $this->userService = new UserService();
+        $this->packageService = new PackageService();
+        $this->packages = $this->packageService->all()->get();
     }
 
     /**
@@ -78,7 +96,7 @@ class UpdateStudent extends Component
             'password' => 'sometimes|min:6',
             'phone_number' => 'sometimes|string|max:255',
             'parent' => 'sometimes|string|min:2|max:255',
-
+            'package_id' => 'sometimes|exists:packages,id',
         ]);
         /**
          * @var User $user
@@ -87,10 +105,20 @@ class UpdateStudent extends Component
             'name' => $this->name,
             'email' => $this->email,
             'phone_number' => $this->phone_number,
+            'parent' => $this->parent,
         ]);
+        $student = $user->student;
         if ($this->parent) {
-            $user->student()->update([
+            $student->update([
                 'parent' => $this->parent,
+            ]);
+        }
+        if ($this->package_id) {
+            $package = $this->packageService->findOrFail($this->package_id);
+            $student->studentPackages()->create([
+                'price' => $package->price,
+                'package_id' => $this->package_id,
+                'student_id' => $student->id,
             ]);
         }
         session()->flash('message', 'Student successfully updated.');
