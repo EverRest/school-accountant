@@ -27,7 +27,7 @@ class CalculateSalary extends Command
      */
     public function handle(LessonService $lessonService): void
     {
-        $lessons = $lessonService->getYesterdayLessons();
+        $lessons = $lessonService->getFinishedLessons();
         $lessons->each(
                 function (Lesson $lesson) use ($lessonService) {
                     $lessonService->calculateLesson($lesson);

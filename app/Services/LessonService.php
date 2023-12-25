@@ -44,10 +44,10 @@ class LessonService extends AbstractCRUDService
     /**
      * @return Collection
      */
-    public function getYesterdayLessons(): Collection
+    public function getFinishedLessons(): Collection
     {
         return $this->query()
-            ->whereBetween('date', [Carbon::yesterday(), Carbon::today()])
+            ->whereDate('date', Carbon::yesterday()->format('Y-m-d'))
             ->get();
     }
 
