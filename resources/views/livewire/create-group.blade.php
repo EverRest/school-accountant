@@ -20,8 +20,8 @@
                 </div>
             @endif
             @if($teachers->isNotEmpty())
-{{--                <x-choices wire:model="selectedTeacher" icon="o-user-circle" hint="Add teacher to the course"--}}
-{{--                           label="Teachers" :options="$teachers" single/>--}}
+                <x-choices wire:model="selectedTeacher" icon="o-user-circle" hint="Add teacher to the course"
+                           label="Teachers" :options="$teachers" single/>
             @else
                 <div class="text-center">
                     <x-button label="Add teacher" icon="o-user-circle" class="btn-primary btn-sm w-1/3"
