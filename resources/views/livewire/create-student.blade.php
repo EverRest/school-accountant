@@ -14,6 +14,7 @@
                 <x-input wire:model="parent" label="Parent Name" type="text" class="form-control"
                          id="parent"
                          placeholder="Enter Parent Name"/>
+                <x-file wire:model="avatar" label="Upload Avatar" accept="image/png, image/jpeg" />
                 @if (session()->has('error'))
                     <x-alert icon="o-exclamation-triangle" class="alert-danger">
                         {{ session('error') }}

@@ -8,6 +8,7 @@
                          placeholder="Enter password"/>
                 <x-input wire:model="phone_number" label="Phone Number" type="text" class="form-control" id="phone_number"
                          placeholder="Enter phone number"/>
+                <x-file wire:model="avatar" label="Upload Avatar" accept="image/png, image/jpeg" />
                 @if (session()->has('error'))
                     <x-alert icon="o-exclamation-triangle" class="alert-danger">
                         {{ session('error') }}

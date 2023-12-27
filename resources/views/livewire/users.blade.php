@@ -18,6 +18,10 @@
         <x-badge :value="$user->name" class="badge-info"/>
         @endscope
 
+        @scope('cell_avatar', $user)
+        <x-avatar :image="$user->avatar" />
+        @endscope
+
         @scope('cell_phone_number', $user)
         <i>{{ $user->phone_number }}</i>
         @endscope

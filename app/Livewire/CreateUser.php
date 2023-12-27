@@ -7,11 +7,15 @@ use App\Services\UserService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Hash;
+use Livewire\WithFileUploads;
 
 abstract class CreateUser extends Component
 {
+    use WithFileUploads;
+
     /**
      * @var string
      */
@@ -36,6 +40,11 @@ abstract class CreateUser extends Component
      * @var string
      */
     public string $phone_number = '';
+
+    /**
+     * @var mixed
+     */
+    public mixed $avatar = null;
 
     /**
      * @var string
@@ -63,7 +72,8 @@ abstract class CreateUser extends Component
     protected array $rules = [
         'email' => 'required|email|unique:users,email',
         'password' => 'required|min:8',
-        'phone_number' => 'required|string|max:255'
+        'phone_number' => 'required|string|max:255',
+        'avatar' => 'required|image|max:10240'
     ];
 
     /**
@@ -72,6 +82,7 @@ abstract class CreateUser extends Component
     public function submit(): void
     {
         $this->validate();
+        $filePath = $this->saveAvatar();
         /**
          * @var User $user
          */
@@ -79,7 +90,8 @@ abstract class CreateUser extends Component
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
-            'phone_number' => $this->phone_number
+            'phone_number' => $this->phone_number,
+            'avatar' => $filePath,
         ]);
         $user->assignRole($this->role);
         $this->reset();
@@ -93,5 +105,16 @@ abstract class CreateUser extends Component
     public function render(): View|Factory|Application|\Illuminate\Contracts\Foundation\Application
     {
         return view($this->view??'livewire.create-user');
+    }
+
+    /**
+     * @return string
+     */
+    protected function saveAvatar(): string
+    {
+        $filename = Carbon::now()->timestamp . '_' . $this->avatar->getClientOriginalName();
+        $filePath = $this->avatar->storeAs('avatars', $filename, 'public');
+
+        return "storage/$filePath";
     }
 }
