@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Course;
 use App\Services\CourseService;
+use App\Traits\Models\SaveAvatarTrait;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -11,6 +12,8 @@ use Livewire\Component;
 
 class UpdateCourse extends Component
 {
+    use SaveAvatarTrait;
+
     /**
      * @var ?Course
      */
@@ -22,6 +25,11 @@ class UpdateCourse extends Component
     public string $name = '';
 
     /**
+     * @var mixed
+     */
+    public mixed $avatar = null;
+
+    /**
      * @var CourseService|null
      */
     private ?CourseService $courseService;
@@ -29,6 +37,14 @@ class UpdateCourse extends Component
     public function __construct()
     {
         $this->courseService = new CourseService();
+    }
+
+    /**
+     * @return void
+     */
+    public function updatedAvatar(): void
+    {
+        $this->saveAvatar($this->course, $this->avatar);
     }
 
     /**

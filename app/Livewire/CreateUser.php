@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\User;
 use App\Services\UserService;
+use App\Traits\Models\SaveAvatarTrait;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -15,6 +16,7 @@ use Livewire\WithFileUploads;
 abstract class CreateUser extends Component
 {
     use WithFileUploads;
+    use SaveAvatarTrait;
 
     /**
      * @var string
@@ -82,7 +84,6 @@ abstract class CreateUser extends Component
     public function submit(): void
     {
         $this->validate();
-        $filePath = $this->saveAvatar();
         /**
          * @var User $user
          */
@@ -91,8 +92,8 @@ abstract class CreateUser extends Component
             'email' => $this->email,
             'password' => Hash::make($this->password),
             'phone_number' => $this->phone_number,
-            'avatar' => $filePath,
         ]);
+        $this->saveAvatar($user, $this->avatar);
         $user->assignRole($this->role);
         $this->reset();
         session()->flash('message', 'User successfully created.');
@@ -105,16 +106,5 @@ abstract class CreateUser extends Component
     public function render(): View|Factory|Application|\Illuminate\Contracts\Foundation\Application
     {
         return view($this->view??'livewire.create-user');
-    }
-
-    /**
-     * @return string
-     */
-    protected function saveAvatar(): string
-    {
-        $filename = Carbon::now()->timestamp . '_' . $this->avatar->getClientOriginalName();
-        $filePath = $this->avatar->storeAs('avatars', $filename, 'public');
-
-        return "storage/$filePath";
     }
 }

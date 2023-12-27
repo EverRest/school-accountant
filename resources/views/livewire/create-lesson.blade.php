@@ -23,6 +23,7 @@
                             wire:model="date"
                             icon="o-calendar"
                             type="datetime-local"/>
+                <x-file wire:model="avatar" label="Upload Photo" accept="image/png, image/jpeg" />
                 @if (session()->has('error'))
                     <x-alert icon="o-exclamation-triangle" class="alert-danger">
                         {{ session('error') }}

@@ -1,9 +1,7 @@
 <?php
 declare(strict_types=1);
-
 namespace App\Livewire;
 
-use App\Services\LessonService;
 use App\Services\PackageService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;

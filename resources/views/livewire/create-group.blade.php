@@ -10,6 +10,7 @@
                 :options="$courses"
                 wire:model="selectedCourse"
                 single/>
+            <x-file wire:model="avatar" label="Upload Photo" accept="image/png, image/jpeg" />
             @if($students->isNotEmpty())
                 <x-choices wire:model="selectedStudents" icon="o-users" hint="Add student to the course"
                            label="Students" :options="$students"/>

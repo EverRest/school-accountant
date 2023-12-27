@@ -48,7 +48,7 @@ class Users extends Component
      */
     public array $headers = [
         ['key' => 'id', 'label' => '#'],
-        ['key' => 'avatar', 'label' => 'Avatar'],
+        ['key' => 'avatar', 'label' => 'Photo'],
         ['key' => 'name', 'label' => 'Name'],
         ['key' => 'email', 'label' => 'Email'],
         ['key' => 'phone_number', 'label' => 'Phone Number'],

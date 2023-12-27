@@ -1,16 +1,17 @@
 <?php
 declare(strict_types=1);
-
 namespace App\Livewire;
 
 use App\Models\User;
 use App\Services\UserService;
+use App\Traits\Models\SaveAvatarTrait;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Throwable;
 
 class CreateTeacher extends CreateUser
 {
+    use SaveAvatarTrait;
     /**
      * @var string
      */
@@ -71,7 +72,6 @@ class CreateTeacher extends CreateUser
     public function submit(): void
     {
         $this->validate();
-        $filePath = $this->saveAvatar();
         /**
          * @var User $user
          */
@@ -81,16 +81,13 @@ class CreateTeacher extends CreateUser
                 'email' => $this->email,
                 'password' => Hash::make($this->password),
                 'phone_number' => $this->phone_number,
-                'avatar' => $filePath,
             ]);
+        $this->saveAvatar($user, $this->avatar);
         $user->assignRole($this->role);
         $user->teacher()->create([
             'individual_lesson_salary' => $this->individual_lesson_salary,
             'group_lesson_salary' => $this->group_lesson_salary
         ]);
-        $filename = Carbon::now()->timestamp . '_' . $this->avatar->getClientOriginalName();
-        $filePath = $this->avatar->storeAs('uploads', $filename, 'local');
-        $this->userService->updateOrFail($user, ['avatar' => $filePath]);
         $this->reset();
         session()->flash('message', 'Teacher successfully created.');
         $this->redirect(route($this->backRoute));

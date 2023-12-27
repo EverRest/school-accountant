@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\Models\CourseTrait;
 use App\Traits\Models\CreatorTrait;
+use App\Traits\Models\HasPublicPhotoAttributeTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,6 +14,7 @@ class Group extends Model
     use HasFactory;
     use CreatorTrait;
     use CourseTrait;
+    use HasPublicPhotoAttributeTrait;
 
     /**
      * @var string[]
@@ -21,6 +23,7 @@ class Group extends Model
         'creator_id',
         'course_id',
         'name',
+        'avatar',
     ];
 
     /**

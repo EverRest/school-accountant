@@ -36,6 +36,7 @@ class Lessons extends Component
      */
     public array $headers = [
         ['key' => 'id', 'label' => '#'],
+        ['key' => 'avatar', 'label' => 'Photo'],
         ['key' => 'name', 'label' => 'Theme'],
         ['key' => 'date', 'label' => 'Date'],
         ['key' => 'course', 'label' => 'Course'],

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
-
 namespace App\Livewire;
 
 use App\Services\PackageService;
 use App\Services\UserService;
+use App\Traits\Models\SaveAvatarTrait;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -14,6 +14,8 @@ use App\Models\User;
 
 class UpdateStudent extends Component
 {
+    use SaveAvatarTrait;
+
     /**
      * @var mixed
      */
@@ -55,6 +57,11 @@ class UpdateStudent extends Component
     public string $parent = '';
 
     /**
+     * @var mixed
+     */
+    public mixed $avatar = null;
+
+    /**
      * @var UserService|null
      */
     private ?UserService $userService;
@@ -69,6 +76,14 @@ class UpdateStudent extends Component
         $this->userService = new UserService();
         $this->packageService = new PackageService();
         $this->packages = $this->packageService->all()->get();
+    }
+
+    /**
+     * @return void
+     */
+    public function updatedAvatar(): void
+    {
+        $this->saveAvatar($this->user, $this->avatar);
     }
 
     /**

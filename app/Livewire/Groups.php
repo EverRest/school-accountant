@@ -31,6 +31,7 @@ class Groups extends Component
      */
     public array $headers = [
         ['key' => 'id', 'label' => '#'],
+        ['key' => 'avatar', 'label' => 'Photo'],
         ['key' => 'name', 'label' => 'Name'],
         ['key' => 'course', 'label' => 'Course'],
         ['key' => 'creator', 'label' => 'Creator'],

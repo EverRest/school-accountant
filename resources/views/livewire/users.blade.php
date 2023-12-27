@@ -19,7 +19,7 @@
         @endscope
 
         @scope('cell_avatar', $user)
-        <x-avatar :image="$user->avatar" />
+        <x-avatar :image="$user->photo"/>
         @endscope
 
         @scope('cell_phone_number', $user)
@@ -34,7 +34,7 @@
         <div class="d-flex align-items-center">
             <x-dropdown>
                 <x-menu-item title="View" link="/users/{{ $user->id }}" icon="o-eye" spinner class="btn-sm"/>
-                <x-menu-item title="Edit"  wire:click="edit({{ $user->id }})" icon="o-pencil"
+                <x-menu-item title="Edit" wire:click="edit({{ $user->id }})" icon="o-pencil"
                              spinner class="btn-sm"/>
                 <x-menu-item title="Remove" wire:click="delete({{ $user->id }})" icon="o-trash" spinner class="btn-sm"/>
             </x-dropdown>

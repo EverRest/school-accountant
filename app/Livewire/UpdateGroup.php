@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-
 namespace App\Livewire;
 
 use App\Models\Group;
@@ -10,16 +9,18 @@ use App\Services\CourseService;
 use App\Services\GroupService;
 use App\Services\StudentService;
 use App\Services\TeacherService;
+use App\Traits\Models\SaveAvatarTrait;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\NoReturn;
 use Livewire\Component;
-use stdClass;
 
 class UpdateGroup extends Component
 {
+    use SaveAvatarTrait;
+
     /**
      * @var string
      */
@@ -62,6 +63,11 @@ class UpdateGroup extends Component
     public ?Group $group = null;
 
     /**
+     * @var mixed
+     */
+    public mixed $avatar = null;
+
+    /**
      * @var GroupService|null
      */
     private ?GroupService $groupService;
@@ -87,6 +93,14 @@ class UpdateGroup extends Component
             ->chunkMap(fn($teacher) => $teacher->user);
         $this->students = $this->studentService->all()
             ->chunkMap(fn($student) => $student->user);
+    }
+
+    /**
+     * @return void
+     */
+    public function updatedAvatar(): void
+    {
+        $this->saveAvatar($this->group, $this->avatar);
     }
 
     /**

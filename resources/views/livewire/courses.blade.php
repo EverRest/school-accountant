@@ -14,6 +14,10 @@
         <strong>{{ $course->id }}</strong>
         @endscope
 
+        @scope('cell_avatar', $course)
+        <x-avatar :image="$course->photo" class="!w-24 !rounded-lg" />
+        @endscope
+
         @scope('cell_name', $course)
         <x-badge :value="$course->name" class="badge-info"/>
         @endscope

@@ -1,14 +1,12 @@
 <?php
 declare(strict_types=1);
-
 namespace App\Livewire;
 
-use App\Models\GroupStudent;
-use App\Models\GroupTeacher;
 use App\Services\CourseService;
 use App\Services\GroupService;
 use App\Services\StudentService;
 use App\Services\TeacherService;
+use App\Traits\Models\SaveAvatarTrait;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -18,6 +16,8 @@ use Livewire\Component;
 
 class CreateGroup extends Component
 {
+    use SaveAvatarTrait;
+
     /**
      * @var string
      */
@@ -69,6 +69,11 @@ class CreateGroup extends Component
     public mixed $selectedStudents;
 
     /**
+     * @var mixed
+     */
+    public mixed $avatar = null;
+
+    /**
      * @var string[]
      */
     public array $rules = [
@@ -76,6 +81,7 @@ class CreateGroup extends Component
         'creatorId' => 'required|exists:users,id',
         'courseId' => 'required|exists:courses,id',
         'selectedTeacherId' => 'required|exists:teachers,user_id',
+        'avatar' => 'required|image|max:10240',
     ];
 
     /**
@@ -112,6 +118,7 @@ class CreateGroup extends Component
             'creator_id' => $this->creatorId,
             'course_id' => $this->courseId,
         ]);
+        $this->saveAvatar($group, $this->avatar);
         $selectedIdArray = $this->selectedStudents->toArray();
         $group->students()
             ->sync(

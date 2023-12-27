@@ -14,6 +14,10 @@
         <strong>{{ $group->id }}</strong>
         @endscope
 
+        @scope('cell_avatar', $group)
+        <x-avatar :image="$group->photo" class="!w-14 !rounded-lg" />
+        @endscope
+
         @scope('cell_name', $group)
         <x-badge :value="$group->name" class="badge-info"/>
         @endscope

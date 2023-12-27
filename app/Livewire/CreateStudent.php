@@ -5,12 +5,14 @@ namespace App\Livewire;
 
 use App\Models\User;
 use App\Services\UserService;
-use Illuminate\Support\Carbon;
+use App\Traits\Models\SaveAvatarTrait;
 use Illuminate\Support\Facades\Hash;
 use Throwable;
 
 class CreateStudent extends CreateUser
 {
+    use SaveAvatarTrait;
+
     /**
      * @var string
      */
@@ -65,7 +67,6 @@ class CreateStudent extends CreateUser
     public function submit(): void
     {
         $this->validate();
-        $filePath = $this->saveAvatar();
         /**
          * @var User $user
          */
@@ -75,13 +76,13 @@ class CreateStudent extends CreateUser
                 'email' => $this->email,
                 'password' => Hash::make($this->password),
                 'phone_number' => $this->phone_number,
-                'avatar' => $filePath,
             ]);
+        $this->saveAvatar($user, $this->avatar);
         $user->assignRole($this->role);
         $user->student()->create([
-                'user_id' => $user->id,
-                'parent' => $this->parent,
-            ]);
+            'user_id' => $user->id,
+            'parent' => $this->parent,
+        ]);
         $this->reset();
         session()->flash('message', 'Student successfully created.');
         $this->redirect(route($this->backRoute));

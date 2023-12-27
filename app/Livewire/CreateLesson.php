@@ -8,6 +8,7 @@ use App\Services\GroupService;
 use App\Services\LessonService;
 use App\Services\StudentAttendanceService;
 use App\Services\UserService;
+use App\Traits\Models\SaveAvatarTrait;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -18,6 +19,8 @@ use App\Models\User as User;
 
 class CreateLesson extends Component
 {
+    use SaveAvatarTrait;
+
     private const TEACHER_ROLE = 'teacher';
 
     /**
@@ -51,6 +54,11 @@ class CreateLesson extends Component
     public mixed $teachers;
 
     /**
+     * @var mixed
+     */
+    public mixed $avatar = null;
+
+    /**
      * @var string[]
      */
     protected array $rules = [
@@ -58,6 +66,7 @@ class CreateLesson extends Component
         'teacher_id' => 'required|exists:users,id',
         'group_id' => 'required|exists:groups,id',
         'date' => 'required|date',
+        'avatar' => 'required|image|max:10240',
     ];
 
     /**
@@ -101,6 +110,7 @@ class CreateLesson extends Component
                 'teacher_id' => $this->teachers->first(fn(User $user) => $user->id)?->teacher?->id,
                 'date' => $this->date
             ]);
+        $this->saveAvatar($lesson, $this->avatar);
         $students = $lesson->group->students;
         if ($students && $students->isNotEmpty()) {
             foreach ($students as $student) {

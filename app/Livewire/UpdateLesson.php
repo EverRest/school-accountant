@@ -6,6 +6,7 @@ use App\Models\Lesson;
 use App\Services\GroupService;
 use App\Services\LessonService;
 use App\Services\UserService;
+use App\Traits\Models\SaveAvatarTrait;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -13,6 +14,8 @@ use Livewire\Component;
 
 class UpdateLesson extends Component
 {
+    use SaveAvatarTrait;
+
     /**
      * @var string
      */
@@ -39,6 +42,11 @@ class UpdateLesson extends Component
     public ?string $date = null;
 
     /**
+     * @var mixed
+     */
+    public mixed $avatar = null;
+
+    /**
      * @var LessonService|null
      */
     private ?LessonService $lessonService;
@@ -48,6 +56,14 @@ class UpdateLesson extends Component
         $this->lessonService = new LessonService();
         $this->groups = (new GroupService())->all()->get();
         $this->users = (new UserService())->getUsersByRoleCode('teacher');
+    }
+
+    /**
+     * @return void
+     */
+    public function updatedAvatar(): void
+    {
+        $this->saveAvatar($this->lesson, $this->avatar);
     }
 
     /**

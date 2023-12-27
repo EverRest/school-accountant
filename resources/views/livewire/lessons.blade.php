@@ -14,6 +14,10 @@
         <strong>{{ $lesson->id }}</strong>
         @endscope
 
+        @scope('cell_avatar', $group)
+        <x-avatar :image="$group->photo" class="!w-14 !rounded-lg" />
+        @endscope
+
         @scope('cell_name', $lesson)
         <strong>{{ $lesson->name }}</strong>
         @endscope
