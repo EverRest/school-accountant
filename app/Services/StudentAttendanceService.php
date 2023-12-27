@@ -6,7 +6,7 @@ namespace App\Services;
 use App\Models\StudentAttendance;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 
-class StudentAttendeeService extends AbstractCRUDService
+class StudentAttendanceService extends AbstractCRUDService
 {
     /**
      * @var string

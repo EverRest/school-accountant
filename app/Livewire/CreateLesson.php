@@ -6,7 +6,7 @@ namespace App\Livewire;
 use App\Models\StudentPackage;
 use App\Services\GroupService;
 use App\Services\LessonService;
-use App\Services\StudentAttendeeService;
+use App\Services\StudentAttendanceService;
 use App\Services\UserService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -66,13 +66,13 @@ class CreateLesson extends Component
     private LessonService $lessonService;
 
     /**
-     * @var StudentAttendeeService
+     * @var StudentAttendanceService
      */
-    private StudentAttendeeService $studentAttendeeService;
+    private StudentAttendanceService $studentAttendeeService;
 
     public function __construct()
     {
-        $this->studentAttendeeService = new StudentAttendeeService();
+        $this->studentAttendeeService = new StudentAttendanceService();
         $this->lessonService = new LessonService();
         $this->teachers = (new UserService())->getUsersByRoleCode(self::TEACHER_ROLE);
         $this->groups = (new GroupService())->all()->get();
