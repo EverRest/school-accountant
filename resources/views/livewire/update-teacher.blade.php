@@ -15,6 +15,7 @@
                 <x-input wire:model="phone_number" label="Phone Number" type="text" class="form-control"
                          id="phone_number"
                          placeholder="Enter Phone Number"/>
+{{--                <x-file wire:model="avatar" label="Avatar" hint="Hi!" accept="image/png, image/jpeg" />--}}
                 @if (session()->has('error'))
                     <x-alert icon="o-exclamation-triangle" class="alert-danger">
                         {{ session('error') }}
