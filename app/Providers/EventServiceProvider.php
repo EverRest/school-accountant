@@ -2,6 +2,8 @@
 declare(strict_types=1);
 namespace App\Providers;
 
+use App\Events\StudentAppliedToLesson;
+use App\Listeners\NotifyUserAboutLessonCount;
 use App\Models\StudentAttendance;
 use App\Observers\StudentAttendanceObserver;
 use Illuminate\Auth\Events\Registered;
@@ -18,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        StudentAppliedToLesson::class => [
+            NotifyUserAboutLessonCount::class,
         ],
     ];
 
