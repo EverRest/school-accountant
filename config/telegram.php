@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\Commands\ApplierBotCommand;
 use Telegram\Bot\Commands\HelpCommand;
 
 return [
@@ -31,17 +32,12 @@ return [
     |             ]
     */
     'bots' => [
-        'applier' => [
+        'my-bot' => [
             'token' => env('TELEGRAM_BOT_TOKEN', 'YOUR-BOT-TOKEN'),
             'commands' => [
-                \App\Console\Commands\ApplierBotCommand::class,
-                //Acme\Project\Commands\MyTelegramBot\BotCommand::class
+                ApplierBotCommand::class,
             ],
         ],
-
-        //        'mySecondBot' => [
-        //            'token' => '123456:abc',
-        //        ],
     ],
 
     /*
@@ -206,7 +202,7 @@ return [
     |
     */
     'shared_commands' => [
-        // 'start' => Acme\Project\Commands\StartCommand::class,
+         'start' => Acme\Project\Commands\StartCommand::class,
         // 'stop' => Acme\Project\Commands\StopCommand::class,
         // 'status' => Acme\Project\Commands\StatusCommand::class,
     ],
