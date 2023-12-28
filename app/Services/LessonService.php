@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Lesson;
@@ -21,7 +22,7 @@ class LessonService extends AbstractCRUDService
     public function getTodayLessons(): Collection
     {
         return $this->query()
-            ->whereBetween('date', [Carbon::today(), Carbon::tomorrow()])
+            ->whereDate('date', Carbon::today())
             ->get();
     }
 
