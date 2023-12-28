@@ -15,7 +15,7 @@ class Statistics extends Component
     /**
      * @return \Illuminate\Contracts\Foundation\Application|Factory|View|Application
      */
-    public function render()
+    public function render(): Application|View|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('livewire.statistics');
     }

@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\ApplierBotController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('applier-bot/webhook', ApplierBotController::class)->name('applier-bot.invoke');
