@@ -15,7 +15,7 @@
         @endscope
 
         @scope('cell_avatar', $group)
-        <x-avatar :image="$group->photo" class="!w-14 !rounded-lg" />
+        <x-avatar :image="$group->photo" class="!w-24 !rounded-lg" />
         @endscope
 
         @scope('cell_name', $lesson)

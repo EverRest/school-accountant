@@ -19,7 +19,7 @@
         @endscope
 
         @scope('cell_avatar', $user)
-        <x-avatar :image="$user->photo"/>
+        <x-avatar :image="$user->photo" class="w-16"/>
         @endscope
 
         @scope('cell_phone_number', $user)
