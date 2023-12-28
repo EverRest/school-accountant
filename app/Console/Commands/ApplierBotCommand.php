@@ -51,9 +51,12 @@ class ApplierBotCommand extends Command
             'resize_keyboard' => true,
             'one_time_keyboard' => true
         ]);
-        $this->replyWithMessage([
+        $response = $this->replyWithMessage([
             'text' => 'Choose a lesson:',
             'reply_markup' => $reply_markup
         ]);
+        // TODO: implement logic with saving user answer
+        // 1. find user by phone number
+        // 2. if he is not applied yet he must be added as appliers
     }
 }
