@@ -32,7 +32,7 @@ return [
     |             ]
     */
     'bots' => [
-        'my-bot' => [
+        'mybot' => [
             'token' => env('TELEGRAM_BOT_TOKEN', 'YOUR-BOT-TOKEN'),
             'commands' => [
                 ApplierBotCommand::class,
