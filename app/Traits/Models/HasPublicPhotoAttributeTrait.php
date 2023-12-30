@@ -4,7 +4,7 @@ namespace App\Traits\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
-trait HasPublicPhotoAttributeTrait
+trait                                                                                                                HasPublicPhotoAttributeTrait
 {
     /**
      * @return Attribute

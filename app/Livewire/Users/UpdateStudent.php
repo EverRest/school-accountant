@@ -112,8 +112,7 @@ class UpdateStudent extends Component
             'phone_number' => 'sometimes|string|max:255',
             'parent' => 'sometimes|string|min:2|max:255',
             'package_id' => 'sometimes|exists:packages,id',
-            'avatar' => 'sometimes|file',
-        ]);
+                                                                                                                            ]);
         /**
          * @var User $user
          */

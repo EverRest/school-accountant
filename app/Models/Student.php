@@ -6,6 +6,7 @@ use App\Traits\Models\UserTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Student extends Model
 {
@@ -29,10 +30,10 @@ class Student extends Model
     }
 
     /**
-     * @return BelongsTo
+     * @return HasMany
      */
-    public function studentPackages(): BelongsTo
+    public function studentPackages(): HasMany
     {
-        return $this->belongsTo(StudentPackage::class);
+        return $this->hasMany(StudentPackage::class);
     }
 }
